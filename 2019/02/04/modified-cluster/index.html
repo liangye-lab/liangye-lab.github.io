@@ -71,7 +71,23 @@
 <li>在某一$\kappa$下，取能够达到平衡的$n$，计算各个温度下的热容并作图，找峰，确定相变温度。</li>
 </ol>
 <p>为了使得平衡更容易找到，我们分别观察从完全无序的构型、从目标构型和从两者的1:1混合构型出发的MC，看混合构型会不会更容易达到平衡。</p>
-<h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3>
+<p>为了保证平衡收敛，MC轨迹取$5\times10^6$步（每步是一个cluster flip）。</p>
+<h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><h4 id="PF相变："><a href="#PF相变：" class="headerlink" title="PF相变："></a>PF相变：</h4><p>从混合态开始的MC轨迹：<code>clusterm_LWX-1.0Y-1.0Z-1.0/</code></p>
+<ul>
+<li>阻挫0.07~0.09，温度0.6~2.0，n 1.0~2.0, 2.5, 3.0, 5.0</li>
+</ul>
+<p>从混乱态开始的MC轨迹：<code>cluster_LWX-1.0Y-1.0Z-1.0/</code></p>
+<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h4 id="1-PF相变"><a href="#1-PF相变" class="headerlink" title="1. PF相变"></a>1. PF相变</h4><ol>
+<li><p>首先观察能量轨迹：<br>(1) 温度在1.0时，基本上所有的$n$（包括$n=0$）都能够在2,000,000步内收敛。存在一个最优的$n$，使得收敛最快。例如，$T=1.0, \kappa=0.07$时$n=1.30$在70,000步左右就能收敛，而$n=0$需要260,000步才能收敛，$n=1.70$在1,800,000才能收敛。对$T=1.0,\kappa=0.09$则是$n=1.40$为最优。<br>(2) 温度在2.0时，明显$n=0$即原始的Wolff算法效果更好，收敛速度更快。</p>
+</li>
+<li><p>观察snapshot。观察证实确实达到了期望的F相。</p>
+</li>
+<li><p>取适宜的n，计算热容。发现取轨迹后半段，得到的热容曲线就很光滑，峰值显著，只有在超低温$T&lt;0.7$左右时才会出现不合理的未平衡的数值。我们认为这个地方不存在相变，所以不予深入探讨。</p>
+</li>
+<li><p>求相变温度。得到$T=2.2, \kappa=0.07$，$T=1.8, \kappa=0.08$，$T=1.4, \kappa=0.09$，与之前的估计非常接近。当然精度可以进一步提高。</p>
+</li>
+</ol>
+<h4 id="2-PM相变"><a href="#2-PM相变" class="headerlink" title="2. PM相变"></a>2. PM相变</h4><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3>
   </section>
   <footer class="post-footer">
     <!--
@@ -94,24 +110,7 @@
         <footer id="footer">
             <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
         </footer>
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-</body>
+    </body>
 </html>
 
 
