@@ -74,9 +74,24 @@
 <p>为了保证平衡收敛，MC轨迹取$5\times10^6$步（每步是一个cluster flip）。</p>
 <h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><h4 id="PF相变："><a href="#PF相变：" class="headerlink" title="PF相变："></a>PF相变：</h4><p>从混合态开始的MC轨迹：<code>clusterm_LWX-1.0Y-1.0Z-1.0/</code></p>
 <ul>
-<li>阻挫0.07~0.09，温度0.6~2.0，n 1.0~2.0, 2.5, 3.0, 5.0</li>
+<li>阻挫0.07, 0.08, 0.09，温度0.6~2.5，n 1.0~2.0, 2.5, 3.0, 5.0</li>
 </ul>
-<p>从混乱态开始的MC轨迹：<code>cluster_LWX-1.0Y-1.0Z-1.0/</code></p>
+<p>从高温态开始的MC轨迹：<code>cluster_LWX-1.0Y-1.0Z-1.0/</code></p>
+<ul>
+<li>阻挫0.09, 0.10，温度0.6~2.5，n 1.0~2.0, 2.5, 3.0, 5.0</li>
+</ul>
+<h4 id="PM相变："><a href="#PM相变：" class="headerlink" title="PM相变："></a>PM相变：</h4><p>从混合态开始的MC轨迹：<code>clusterm_LWX-1.0Y-1.0Z-1.0/</code></p>
+<ul>
+<li>阻挫0.11~0.16，温度0.6~2.5，n 1.0~2.0, 2.5, 3.0, 5.0</li>
+</ul>
+<p>从高温态开始的MC轨迹：<code>clusterR_LWX-1.0Y-1.0Z-1.0/</code></p>
+<ul>
+<li>阻挫0.15, 0.16，温度0.6~2.5，n 1.0~2.0, 2.5, 3.0, 5.0<br>（只看多项相点附近会不会容易地找到其他相）</li>
+</ul>
+<p>从低温态开始的MC轨迹：<code>cluster_LWX-1.0Y-1.0Z-1.0/</code></p>
+<ul>
+<li>阻挫0.11~0.16，温度0.6~2.5，n 1.0~2.0, 2.5, 3.0, 5.0</li>
+</ul>
 <h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h4 id="1-PF相变"><a href="#1-PF相变" class="headerlink" title="1. PF相变"></a>1. PF相变</h4><ol>
 <li><p>首先观察能量轨迹：<br>(1) 温度在1.0时，基本上所有的$n$（包括$n=0$）都能够在2,000,000步内收敛。存在一个最优的$n$，使得收敛最快。例如，$T=1.0, \kappa=0.07$时$n=1.30$在70,000步左右就能收敛，而$n=0$需要260,000步才能收敛，$n=1.70$在1,800,000才能收敛。对$T=1.0,\kappa=0.09$则是$n=1.40$为最优。<br>(2) 温度在2.0时，明显$n=0$即原始的Wolff算法效果更好，收敛速度更快。</p>
 </li>
@@ -110,7 +125,24 @@
         <footer id="footer">
             <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
         </footer>
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
 
 
