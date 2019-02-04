@@ -7,8 +7,8 @@
         <meta name="description" content="">
         <link rel="shortcut icon" href="/asset/guolin.png">
         <link rel="canonical" href="http://guolinn.com/">
-        <link rel="alternate" type="application/rss+xml" title="John Doe" href="/atom.xml">
-        <title>改进的Cluster算法对低$Kappa$区数值计算 | Hexo</title>
+        <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="/atom.xml">
+        <title>改进的cluster算法计算低κ区相变温度 | 实验记录</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -28,8 +28,8 @@
 	
 
         <header id="header">
-            <a id="logo" href="/"><img src="/asset/guolin.png" alt="Hexo"></a>
-            <h1><a href="/">John Doe</a></h1>
+            <a id="logo" href="/"><img src="/asset/guolin.png" alt="实验记录"></a>
+            <h1><a href="/">Ye Liang</a></h1>
             <p></p>
             <div id="follow-icons">
                   <a href="/atom.xml"><i class="fa fa-rss-square fa-2x"></i></a>
@@ -43,18 +43,40 @@
 <article class="post">
   February 4, 2019
   
+    <span class="taglist">  &middot; 
+    
+    
+      <a href="/tags/WW项目/">WW项目</a> 
+    
+    </span>
+  
 
-  <h1 class="post-title">改进的Cluster算法对低$Kappa$区数值计算</h1>
+  <h1 class="post-title">改进的cluster算法计算低κ区相变温度</h1>
   <section class="post-content article-entry">
-    <h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><p>本实验的研究重点</p>
-<script type="math/tex; mode=display">\begin{equation}
-\LaTeX \kappa
-\end{equation}</script><h2 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h2><h2 id="原理与逻辑"><a href="#原理与逻辑" class="headerlink" title="原理与逻辑"></a>原理与逻辑</h2><h2 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h2><h2 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2>
+    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>在Widom-Wheeler (WW)项目中，我们希望计算模型的相变温度。</p>
+<p>如果按照Ising模型相变的思路来计算临界温度的话，通常使用Wolff cluster算法并可能配合finite size scaling计算相变温度。如果使用Single Flip (SF)方法的MC，那么本身在一个（接近）二级相变的地方可能有比较强的临界降速(critical slowing down)，而Wolff cluster算法可以很好地避免这个问题（为什么？）。</p>
+<p>在WW模型中，也可以构造对应的Wolff Cluster算法，但是这个算法在低温下不是很好用。之前通过粗略的数值计算发现[未归档]，Widom-Wheeler (WW)模型的相变温度估计值都比较低，$T\sim 1$。我们发现对于PF相变，在$\kappa$比较低($\sim0.05$)的时候，相变温度比较高$T_c&gt;2$，Wolff Cluster算法的效果非常好，能够通过计算热容的峰来寻找相变温度（当然也可以使用高阶矩做finite size scaling）[未归档]。然而，对于更高的$\kappa$，相变温度很低，计算效果并不好，体现在可能存在热容峰的温度附近MC难以达到平衡。</p>
+<p>通过观察，我们发现，在低温下Wolff cluster算法会将几乎整个系统都加入到cluster中，所以每次翻转的效率并不是很高。虽然三种键对应的加入概率大致合理，但是可能由于超高的连通性（24），每个site被加入到团簇中的概率大大提升，最终整个体系都被加入到团簇中。</p>
+<p>为了提高Cluster算法的效率，我们对这一算法做出改进。改进原理参照Frenkel的教科书，简而言之，是牺牲了Acc ratio使得可以在更高温度下构造团簇。为了求温度$T$下的系综，我们在$T’&gt;T$下构造团簇，这样团簇可以比较小；然后按照概率$acc$翻转来接受新构型。当$T’=T$时，$acc=1$，程序退化为Wolff算法；当$T’\to\infty$时，程序退化为SF算法。</p>
+<p>由于初步的尝试看到，改进的cluster算法可能在高$\kappa$的区域仍然效果不加，所以本实验主要研究低$\kappa$下的相变温度。</p>
+<ol>
+<li>求$\kappa=0.08\sim0.10$的PF相变温度</li>
+<li>求$\kappa=0.10\sim0.16$的PM相变温度</li>
+<li>观察$\kappa=0.10$时算法能否找到平衡。</li>
+<li>注意能否发现中间相。</li>
+</ol>
+<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><p>WidomWheelerGenCluster, v1.0.0</p>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><ol>
+<li>我们设定一系列的温度倍数$n=T’/T$，来获得给定温度、给定阻挫下的系综，计算平衡后的平均能量和热容。取能够达到平衡的倍数$n$，观察其snapshot是否真的达到目标相。</li>
+<li>在某一$\kappa$下，取能够达到平衡的$n$，计算各个温度下的热容并作图，找峰，确定相变温度。</li>
+</ol>
+<p>为了使得平衡更容易找到，我们分别观察从完全无序的构型、从目标构型和从两者的1:1混合构型出发的MC，看混合构型会不会更容易达到平衡。</p>
+<h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3>
   </section>
   <footer class="post-footer">
     <!--
     <section class="author">
-      <h4>John Doe</h4>
+      <h4>Ye Liang</h4>
       <p></p>
     </section>
     -->
@@ -70,7 +92,7 @@
 
         </main>
         <footer id="footer">
-            <section id="footer-message">&copy; 2019 John Doe. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
+            <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. <a href="https://github.com/guolin/crisp-hexo-theme" target="_blank">crisp</a> theme by <a href="guolin.github.io" target="_blank">Guo Lin</a>.</section>
         </footer>
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
