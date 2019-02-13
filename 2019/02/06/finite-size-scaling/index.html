@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="">
+        <link rel="canonical" href="http://github.com/">
+        <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
+        <title>对PF相变的有限尺度标度计算 | 实验记录</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            
+            <h1><a href="/">Ye Liang</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  February 6, 2019
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href="/tags/WW项目/">WW项目</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">对PF相变的有限尺度标度计算</h1>
+  <section class="post-content article-entry">
+    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>虽然在上一个实验中，改进的cluster算法(GC)比较成功，但是通过有限尺度体系的热容峰求相变温度仍然不够可靠。更专业的相变温度的计算方法仍然是有限尺度标度(finite size scaling, FSC)。</p>
+<p>通过这部分计算，我们将能够以较高的精度得到PF相变的温度数值。</p>
+<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h4 id="1-程序修改"><a href="#1-程序修改" class="headerlink" title="1. 程序修改"></a>1. 程序修改</h4><ol>
+<li>为了计算WW模型的FSC，首先要求磁矩的高阶矩。对于PF相变，磁矩很容易统计。程序需要增加对磁矩的统计。</li>
+<li>具体计算的时候，考虑好计算所需的步数。</li>
+</ol>
+<h4 id="2-kappa-0-07"><a href="#2-kappa-0-07" class="headerlink" title="2. $\kappa=0.07$"></a>2. $\kappa=0.07$</h4><ol>
+<li>先算两个较小体系$N=10^3$和$N=20^3$，温度范围取1.5~3.0，步数取5e4次，看磁矩曲线的形状是否合理，看四阶矩的交点在什么地方。</li>
+<li>在这个交点附近继续算$N=30^3$、$N=40^3$以及$N=50^3$看看是否符合预期。</li>
+</ol>
+<h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><ul>
+<li><p>粗算：<code>coarse/cluster_L{Lx}_LWX-1.0Y-1.0Z-1.0/</code><br>Lx=10~40<br>T=1.5~3.0, dT=0.1<br>$\kappa$=0.07,0.08,0.09<br>n=1.0, 1.1, 1.2<br>Nstep=5e4</p>
+</li>
+<li><p>细算：<code>finer1/cluster_L{Lx}_LWX-1.0Y-1.0Z-1.0/</code><br>Lx=10~40<br>T=2.1~2.4, dT=0.01<br>$\kappa$=0.07,0.08,0.09<br>n=1.0, 1.1, 1.2<br>Nstep=1e5</p>
+</li>
+<li><p>细算：<code>finer2/cluster_L{Lx}_LWX-1.0Y-1.0Z-1.0/</code><br>Lx=5, 10, 20<br>T=2.2~2.4, dT=0.01<br>$\kappa$=0.07<br>n=1.0<br>Nstep=2e6</p>
+</li>
+<li><p>细算：<code>finer2/cluster_L{Lx}_LWX-1.0Y-1.0Z-1.0/</code><br>Lx=5, 10, 20<br>T=2.19, 2.20, 2.21<br>$\kappa$=0.07<br>n=1.0<br>Nstep=1e7</p>
+<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h4 id="kappa-0-07"><a href="#kappa-0-07" class="headerlink" title="$\kappa=0.07$"></a>$\kappa=0.07$</h4></li>
+</ul>
+<ol>
+<li><p>首先通过10、20和30三个尺寸下步数为5e4次的粗略计算得出$U_4$的交叉点温度应该在2.2到2.3之间。同时注意到误差特别大，需要增加步数。</p>
+</li>
+<li><p>将精度提高到$dT=0.01$，并且将步数提高到1e5次。结果发现直接计算$U_4$的效果并不好。在相变点附近，磁矩轨迹抖动很大，采样看起来不完整。必须通过增加步数来提高精度。</p>
+</li>
+<li><p>步数提高到2e6次。从$N=5^3$的$U_4$计算结果来看，首先误差虽然显著减小，但是仍然需要进一步减小；其次整条曲线显出折线形，令人困惑。<br>观察$N=10^3$，看到两条$U_4$曲线交在2.198附近。其他地方的皱褶不影响这个判断。</p>
+</li>
+<li><p>采用trivial parallel思路，算100个1e5达到算1个1e7的效果。完全可行。$N=5^3$和$N=10^3$几乎是秒出。这两个尺度下误差控制得还可以接受，清楚地看到交点在2.1935。<br>然而加上$N=20^3$的线之后发现三条线并不交于一点，三个交点分得很开。<br>加上$N=15^3$的线之后发现，后后三条线交于2.205(1)附近。尽管后三条线的误差还是很可观的，但是交点确实给的比较近了。<br>但是这里的统计误差不可忽视。改变cutoff后交点的位置也会改变，所以必须进一步提高精度。</p>
+</li>
+</ol>
+<h4 id="kappa-0-08"><a href="#kappa-0-08" class="headerlink" title="$\kappa=0.08$"></a>$\kappa=0.08$</h4><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>从目前的结果来看，Wolff算法在$\kappa=0.07$的时候靠近$T_c$时的采样效率比较差。这个现象出乎意料，因为我们至少认为在PF线上Wolff算法是可以用的。所以按照目前的结果，不能直接求出$U_4$。</p>
+<h3 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h3><p>搞清楚为什么Wolff算法在$\kappa=0.07$这样的低阻挫下都会显著降低效率。这需要(1)检查代码；(2)观察在相变点附近算法的表现，是不是产生了大的cluster。</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Ye Liang</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2019/02/08/pf-cluster-size-over-temperature/">
+        ← prev <!--PF线Wolff算法产生的cluster尺寸观察-->
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2019/02/04/modified-cluster/">
+        <!--改进的cluster算法计算低κ区相变温度--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
+        </footer>
+        
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
+
+
