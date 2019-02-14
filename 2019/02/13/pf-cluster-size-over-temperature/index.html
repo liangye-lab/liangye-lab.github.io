@@ -56,8 +56,8 @@
 <p>我一直认为，ANNNI中cluster算法可用，是因为其阻挫比较弱，一个粒子的8条键中只占2条；而WW模型的阻挫特别强，占到18/24（如果将$\gamma=2$视作数两次，那么就是30/36）。我试图观察是不是因为阻挫的显著增加而导致出现了Wolff算大明显的变化。</p>
 <h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><p>WidomWheelerGenCluster, v1.1.0<br>WidomWheelerCluster, v1.1.2</p>
 <h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h5 id="1-直接观察-T-0-00-sim0-10-之间Wolff算法生成团簇的尺寸"><a href="#1-直接观察-T-0-00-sim0-10-之间Wolff算法生成团簇的尺寸" class="headerlink" title="1. 直接观察$T=0.00\sim0.10$之间Wolff算法生成团簇的尺寸"></a>1. 直接观察$T=0.00\sim0.10$之间Wolff算法生成团簇的尺寸</h5><p>意图是观察并确定在PF区域内Wolff算法并不能合理地产生团簇。</p>
-<p>这里还可以计算采样效率——自相关时间(autocorrelation time)</p>
-<h5 id="2-更改阻挫键的数目，观察Wolff算法本身的改变"><a href="#2-更改阻挫键的数目，观察Wolff算法本身的改变" class="headerlink" title="2. 更改阻挫键的数目，观察Wolff算法本身的改变"></a>2. 更改阻挫键的数目，观察Wolff算法本身的改变</h5><h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><p><code>WidomWheelerCluster/cluster_L24_LWX-1.0Y-1.0Z-1.0/</code></p>
+<h5 id="2-计算采样效率——自相关时间-autocorrelation-time"><a href="#2-计算采样效率——自相关时间-autocorrelation-time" class="headerlink" title="2. 计算采样效率——自相关时间(autocorrelation time)"></a>2. 计算采样效率——自相关时间(autocorrelation time)</h5><p>因为要求相变温度，所以要在相变点附近计算$U_4$。为了显示算法的采样效率，直接在SF预测的相变温度附近计算Wolff算法的自相关函数。</p>
+<h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><p><code>WidomWheelerCluster/cluster_L24_LWX-1.0Y-1.0Z-1.0/</code></p>
 <h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><ol>
 <li><p>随着$\kappa$的升高，团簇尺寸随温度的变化曲线有变化。Ising的那个突然降到零的现象被平滑化，并且虽然估计的相变温度应该降低，但是团簇的尺寸在同一温度下随着$\kappa$的升高而升高。<br><img src="/img/ww_cluster_size.png" alt="cluster_size" width="800"><br>从图中可以看到，本来应该像Ising的曲线($\kappa=0.00$)一样下降的其他曲线，在中间某处突然一拐，变成“直线”。随着$\kappa$增大，这个拐点上移，最后融合在低温的平台区，显得整条曲线没有拐点。</p>
 </li>
@@ -95,24 +95,7 @@
             <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
         </footer>
         
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-</body>
+    </body>
 </html>
 
 
