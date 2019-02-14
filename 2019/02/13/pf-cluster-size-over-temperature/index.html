@@ -52,7 +52,7 @@
 
   <h1 class="post-title">PF线Wolff算法产生的cluster尺寸观察</h1>
   <section class="post-content article-entry">
-    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>之前的FSC实验需要提高$U_4$精度，也就是说要么提高采样量，要么提高采样效率。然而，在PF线上Wolff算法竟然也出现了采样效率低的现象（确定Ising点效率还比较高）。我们需要了解在这个区域本来预期效率不差的Wolff算法究竟发生了什么。</p>
+    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>之前的FSS实验需要提高$U_4$精度，也就是说要么提高采样量，要么提高采样效率。然而，在PF线上Wolff算法竟然也出现了采样效率低的现象（确定Ising点效率还比较高）。我们需要了解在这个区域本来预期效率不差的Wolff算法究竟发生了什么。</p>
 <p>我一直认为，ANNNI中cluster算法可用，是因为其阻挫比较弱，一个粒子的8条键中只占2条；而WW模型的阻挫特别强，占到18/24（如果将$\gamma=2$视作数两次，那么就是30/36）。我试图观察是不是因为阻挫的显著增加而导致出现了Wolff算大明显的变化。</p>
 <h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><p>WidomWheelerGenCluster, v1.1.0<br>WidomWheelerCluster, v1.1.2</p>
 <h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h5 id="1-直接观察-T-0-00-sim0-10-之间Wolff算法生成团簇的尺寸"><a href="#1-直接观察-T-0-00-sim0-10-之间Wolff算法生成团簇的尺寸" class="headerlink" title="1. 直接观察$T=0.00\sim0.10$之间Wolff算法生成团簇的尺寸"></a>1. 直接观察$T=0.00\sim0.10$之间Wolff算法生成团簇的尺寸</h5><p>意图是观察并确定在PF区域内Wolff算法并不能合理地产生团簇。</p>
@@ -95,7 +95,24 @@
             <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
         </footer>
         
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
 
 

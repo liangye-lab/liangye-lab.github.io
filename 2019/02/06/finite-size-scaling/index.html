@@ -52,10 +52,10 @@
 
   <h1 class="post-title">对PF相变的有限尺度标度计算</h1>
   <section class="post-content article-entry">
-    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>虽然在上一个实验中，改进的cluster算法(GC)比较成功，但是通过有限尺度体系的热容峰求相变温度仍然不够可靠。更专业的相变温度的计算方法仍然是有限尺度标度(finite size scaling, FSC)。</p>
+    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>虽然在上一个实验中，改进的cluster算法(GC)比较成功，但是通过有限尺度体系的热容峰求相变温度仍然不够可靠。更专业的相变温度的计算方法仍然是有限尺度标度(finite size scaling, FSS)。</p>
 <p>通过这部分计算，我们将能够以较高的精度得到PF相变的温度数值。</p>
 <h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h4 id="1-程序修改"><a href="#1-程序修改" class="headerlink" title="1. 程序修改"></a>1. 程序修改</h4><ol>
-<li>为了计算WW模型的FSC，首先要求磁矩的高阶矩。对于PF相变，磁矩很容易统计。程序需要增加对磁矩的统计。</li>
+<li>为了计算WW模型的FSS，首先要求磁矩的高阶矩。对于PF相变，磁矩很容易统计。程序需要增加对磁矩的统计。</li>
 <li>具体计算的时候，考虑好计算所需的步数。</li>
 </ol>
 <h4 id="2-kappa-0-07"><a href="#2-kappa-0-07" class="headerlink" title="2. $\kappa=0.07$"></a>2. $\kappa=0.07$</h4><ol>
@@ -116,7 +116,24 @@
             <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
         </footer>
         
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
 
 
