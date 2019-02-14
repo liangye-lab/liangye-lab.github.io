@@ -40,7 +40,7 @@
         
 
 <article class="post">
-  February 8, 2019
+  February 13, 2019
   
     <span class="taglist">  &middot; 
     
@@ -54,8 +54,20 @@
   <section class="post-content article-entry">
     <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>之前的FSC实验需要提高$U_4$精度，也就是说要么提高采样量，要么提高采样效率。然而，在PF线上Wolff算法竟然也出现了采样效率低的现象（确定Ising点效率还比较高）。我们需要了解在这个区域本来预期效率不差的Wolff算法究竟发生了什么。</p>
 <p>我一直认为，ANNNI中cluster算法可用，是因为其阻挫比较弱，一个粒子的8条键中只占2条；而WW模型的阻挫特别强，占到18/24（如果将$\gamma=2$视作数两次，那么就是30/36）。我试图观察是不是因为阻挫的显著增加而导致出现了Wolff算大明显的变化。</p>
-<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><p>WidomWheelerGenCluster, v1.1.0<br>WidomWheelerCluster, v1.1.1</p>
-<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h4 id="1-直接观察-T-0-00-sim0-10-之间Wolff算法生成团簇的尺寸"><a href="#1-直接观察-T-0-00-sim0-10-之间Wolff算法生成团簇的尺寸" class="headerlink" title="1. 直接观察$T=0.00\sim0.10$之间Wolff算法生成团簇的尺寸"></a>1. 直接观察$T=0.00\sim0.10$之间Wolff算法生成团簇的尺寸</h4><h4 id="2-更改阻挫键的数目，观察Wolff算法本身的改变"><a href="#2-更改阻挫键的数目，观察Wolff算法本身的改变" class="headerlink" title="2. 更改阻挫键的数目，观察Wolff算法本身的改变"></a>2. 更改阻挫键的数目，观察Wolff算法本身的改变</h4><h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3>
+<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><p>WidomWheelerGenCluster, v1.1.0<br>WidomWheelerCluster, v1.1.2</p>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h5 id="1-直接观察-T-0-00-sim0-10-之间Wolff算法生成团簇的尺寸"><a href="#1-直接观察-T-0-00-sim0-10-之间Wolff算法生成团簇的尺寸" class="headerlink" title="1. 直接观察$T=0.00\sim0.10$之间Wolff算法生成团簇的尺寸"></a>1. 直接观察$T=0.00\sim0.10$之间Wolff算法生成团簇的尺寸</h5><p>意图是观察并确定在PF区域内Wolff算法并不能合理地产生团簇。</p>
+<p>这里还可以计算采样效率——自相关时间(autocorrelation time)</p>
+<h5 id="2-更改阻挫键的数目，观察Wolff算法本身的改变"><a href="#2-更改阻挫键的数目，观察Wolff算法本身的改变" class="headerlink" title="2. 更改阻挫键的数目，观察Wolff算法本身的改变"></a>2. 更改阻挫键的数目，观察Wolff算法本身的改变</h5><h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><p><code>WidomWheelerCluster/cluster_L24_LWX-1.0Y-1.0Z-1.0/</code></p>
+<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><ol>
+<li><p>随着$\kappa$的升高，团簇尺寸随温度的变化曲线有变化。Ising的那个突然降到零的现象被平滑化，并且虽然估计的相变温度应该降低，但是团簇的尺寸在同一温度下随着$\kappa$的升高而升高。<br><img src="/img/ww_cluster_size.png" alt="cluster_size" width="800"><br>从图中可以看到，本来应该像Ising的曲线($\kappa=0.00$)一样下降的其他曲线，在中间某处突然一拐，变成“直线”。随着$\kappa$增大，这个拐点上移，最后融合在低温的平台区，显得整条曲线没有拐点。</p>
+</li>
+<li><p>根本上，我们是要计算相变点附近的$U_4$，所以要考察相变点附近的采样效率。这一点可以用自相关时间来反映。<br>这是三维Ising在相变点下的autocorrelation：<br><img src="/img/autocorr/autocorrK0.00T4.50.png" alt="autocorrelation" width="800"><br>这是$\kappa&gt;0$时在SF估计的相变温度附近的autocorrelation：<br><img src="/img/autocorr/autocorrK0.01T4.20.png" alt="autocorrelation" width="800"><br><img src="/img/autocorr/autocorrK0.03T3.50.png" alt="autocorrelation" width="800"><br>如果说在极小的$\kappa$下这个autocorrelation和Ising差不太多，那么在稍微加大一点的$\kappa$下：<br><img src="/img/autocorr/autocorrK0.05T2.90.png" alt="autocorrelation" width="800"><br><img src="/img/autocorr/autocorrK0.07T2.20.png" alt="autocorrelation" width="800"><br>这样的autocorrelation直接宣告在这些$\kappa$下算法<strong>不可用</strong>。</p>
+</li>
+</ol>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>即使在超低$\kappa$下Wolff算法还可以使用，在还没有到达$\kappa=0.10$的时候，这个算法已经不能继续使用了。无论是从cluster size上只管观察，还是从自相关函数上观察，这个算法已经失效。</p>
+<p>这些结果进一步意味着对于更高的$\kappa$，这个算法将继续不可用。那么GenCluster算法能够起到的效果仍然不够。</p>
+<h3 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h3><p>必须寻找新的cluster算法了。</p>
+
   </section>
   <footer class="post-footer">
     <!--
