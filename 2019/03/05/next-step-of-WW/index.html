@@ -8,7 +8,7 @@
         <link rel="shortcut icon" href="">
         <link rel="canonical" href="http://github.com/">
         <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
-        <title>Archives: 2019/3 | 实验记录</title>
+        <title>阶段反思-WW项目的下一步 | 实验记录</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 
     </head>
     
-		<body class="home-template">
+		<body class="post-template">
 	
 
         <header id="header">
@@ -38,87 +38,50 @@
 
         <main id="content">
         
-<section id="{{id}}" class="{{post_class}}">
-  <h3 class="post-title">
-  <a href="/2019/03/14/avbmc/">AVBMC在WW模型上的效果测试</a>
-  
-  <span class="separator"> &middot; </span>
-  
-  March 14, 2019
-  
-  
-    <span class="taglist">  &middot; 
-    
-    
-      <a href="/tags/WW项目/">WW项目</a> 
-    
-    
-  
-  </span></h3>
-</section>
 
-<section id="{{id}}" class="{{post_class}}">
-  <h3 class="post-title">
-  <a href="/2019/03/06/parallel-tempering/">并行退火研究WW模型PF相变</a>
-  
-  <span class="separator"> &middot; </span>
-  
-  March 6, 2019
-  
-  
-    <span class="taglist">  &middot; 
-    
-    
-      <a href="/tags/WW项目/">WW项目</a> 
-    
-    
-  
-  </span></h3>
-</section>
-
-<section id="{{id}}" class="{{post_class}}">
-  <h3 class="post-title">
-  <a href="/2019/03/05/next-step-of-WW/">阶段反思-WW项目的下一步</a>
-  
-  <span class="separator"> &middot; </span>
-  
+<article class="post">
   March 5, 2019
   
-  
     <span class="taglist">  &middot; 
     
     
       <a href="/tags/WW项目/">WW项目</a> 
     
-    
+    </span>
   
-  </span></h3>
-</section>
 
-<section id="{{id}}" class="{{post_class}}">
-  <h3 class="post-title">
-  <a href="/2019/03/02/2019-Feb/">2019年二月总结</a>
-  
-  <span class="separator"> &middot; </span>
-  
-  March 2, 2019
-  
-  
-    <span class="taglist">  &middot; 
-    
-    
-      <a href="/tags/月度总结/">月度总结</a> 
-    
-    
-  
-  </span></h3>
-</section>
+  <h1 class="post-title">阶段反思-WW项目的下一步</h1>
+  <section class="post-content article-entry">
+    <p>读了很多关于cluster算法的文献，但是找不到直接适用或者简单修改就可以套用在WW模型上的cluster算法。WW模型有两个特点，一是阻挫，二是大量次邻近作用。这样的特点使得这个模型不可能用简单的plaquette方法（包括worm），也不可能直接套用Wolff这样的经典方法（许多文章都说Wolff改进的cluster不能代表正确的关联长度）。这样就是说现有的几乎所有直接cluster算法不可用。</p>
+<p>我自己是没有开发算法的经验的，我甚至没有好好学过高等的概率论。所以不要妄想自己凭空造物。</p>
+<p>这样暂时就只剩下了一条路，增强（偏置）采样。在cluster的基础上，尝试看增强采样采样之类的算法能不能起一点作用。</p>
+<p>关于增强采样的方法，我的疑问主要在于其如何和Lattice模型结合，以及具体参数的设置。</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Ye Liang</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
 
 <nav class="pagination" role="pagination">
-  
-  <span class="page-number">Page 1 of 1</span>
-  
+    
+    <a class="newer-posts" href="/2019/03/06/parallel-tempering/">
+        ← prev <!--并行退火研究WW模型PF相变-->
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2019/03/02/2019-Feb/">
+        <!--2019年二月总结--> next →
+    </a>
+    
 </nav>
+
 
         </main>
         <footer id="footer">

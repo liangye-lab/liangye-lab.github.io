@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="">
+        <link rel="canonical" href="http://github.com/">
+        <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
+        <title>AVBMC在WW模型上的效果测试 | 实验记录</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            
+            <h1><a href="/">Ye Liang</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  March 14, 2019
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href="/tags/WW项目/">WW项目</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">AVBMC在WW模型上的效果测试</h1>
+  <section class="post-content article-entry">
+    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>AVBMC试图改善由于势能面过于崎岖造成的SF采样效率低下的问题。我们将AVBMC应用在Lattice模型上。第一个版本的AVBMC没有特别强调相反符号互换，可能造成一些采样浪费。第二个版本针对spin交换做了优化。</p>
+<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><p>WidomWheelerAVBMCSF, v2.0</p>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>对AVB rate和$P_\text{bias}$两个参数跑$10^5$次MC，计算能量的自相关函数，看AVB算法对提高效率有没有帮助。</p>
+<p>因为目前在计算PF相变，就观察相变线上$T=2.20,\kappa=0.07$的情况。</p>
+<h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><p><code>cluster_AVBR0.x0_PB0.x0_LWX-1.0Y-1.0Z-1.0/dataK0.07T2.20/</code></p>
+<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><p><img src="/img/avbmc/autocorr0.30.png" alt="autocorr0.30" width="800"><br><img src="/img/avbmc/autocorr0.50.png" alt="autocorr0.50" width="800"><br><img src="/img/avbmc/autocorr0.80.png" alt="autocorr0.80" width="800"></p>
+<p>显然从自相关函数上来看，采样效率并没有得到任何提高。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>从目前的数据来看，这样的AVBMC方法对WW模型在PF线上的采样效率没有提高。</p>
+<h3 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h3><p>讨论是否可以改进AVBMC算法。</p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Ye Liang</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2019/03/06/parallel-tempering/">
+        <!--并行退火研究WW模型PF相变--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
+        </footer>
+        
+    </body>
+</html>
+
+

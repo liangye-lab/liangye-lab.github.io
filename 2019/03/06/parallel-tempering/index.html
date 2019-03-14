@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="">
+        <link rel="canonical" href="http://github.com/">
+        <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
+        <title>并行退火研究WW模型PF相变 | 实验记录</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            
+            <h1><a href="/">Ye Liang</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6><a href="/about">About</a></h6>
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  March 6, 2019
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href="/tags/WW项目/">WW项目</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">并行退火研究WW模型PF相变</h1>
+  <section class="post-content article-entry">
+    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>之前的实验显示了在计算WW模型的PF相变温度的时候各种Wolff类型的cluster算法都会失效，主要问题在于采样效率非常低。可以确认cluster算法比single flip (SF)要快，只是对于做FSS还不够。所以我们想要在cluster算法的基础上增加并行退火来提速。</p>
+<p>之前的文献阅读看到现有的用于阻挫体系的cluster算法都非常专一，不是很适合WW模型。并行退火算是一种通用的技术手段可以加快采样效率。</p>
+<p>并行退火用在阻挫体系的PF相变可以参考<sup><a href="#fn_1" id="reffn_1">1</a></sup>。这篇文献的模型是EA自旋玻璃。其中使用并行退火和SF (Metropolis)。文章中引到另一篇文章<sup><a href="#fn_2" id="reffn_2">2</a></sup>指出对于各向同性的体系来说，可能SF会比cluster更有效。</p>
+<p>我们主要模仿这篇文章的算法框架。算法本身容易理解，关键是其中的两个重要参数：一是replica的数量和温度间隔，二是PT交换的频率。</p>
+<p>按照这篇文章，replica的温度一般是等$\Delta \beta$，且使得交换两个相邻replica的接受概率在0.5左右。</p>
+<p>Replica的数目与尺寸有关！虽然应该随着尺寸的增加而增加，不过显然会收到计算资源的制约。在这篇文章中，replica的数目（replica或者temperature replica指温度的个数；realization或者disorder realization指的是自旋玻璃阻挫构型）。另有在GPU上并行的文章<sup><a href="#fn_3" id="reffn_3">3</a></sup>用了24、56个温度replica。看上去十几个replica就差不多了。</p>
+<p>Replica交换的频率占总的Move的比例看Frenkel上是0.1。</p>
+<p>Katzgraber在<a href="https://arxiv.org/pdf/0905.1629.pdf" target="_blank" rel="noopener">Introduction to Monte Carlo Methods</a>中说</p>
+<blockquote>
+<p>After a fixed number of Monte Carlo sweeps (generally one lattice sweep) two copies at neighboring temperatures $T_i$ and $T_{i+1}$ are exchanged witha Monte Carlo like move and accepted with a probability</p>
+<script type="math/tex; mode=display">\begin{equation}
+T[(E_i,T_i)\to(E_{i+1},T_{i+1})] = \min\{1,exp[(E_{i+1}−E_i)(1/T_{i+1}−1/T_{i})]\}.
+\end{equation}</script></blockquote>
+<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><p>WidomWheelerPT, v1.0</p>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>从初步的数据来看，PT可以加速，但是还不够。不知道调整参数是不是可以进一步加速。</p>
+<h3 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h3><p>需要获取更多关于参数设置的知识。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><blockquote id="fn_1">
+<sup>1</sup>. Papakonstantinou, T., and A. Malakis. “Critical behavior of the three-dimensional Ising model with anisotropic bond randomness at the ferromagnetic-paramagnetic transition line.” Physical Review E 87.1 (2013): 012132.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. Hasenbusch, Martin, et al. “Critical behavior of the three-dimensional ±J Ising model at the paramagnetic-ferromagnetic transition line.” Physical Review B 76.9 (2007): 094402.<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. Fang, Ye, et al. “Parallel tempering simulation of the three-dimensional Edwards–Anderson model with compact asynchronous multispin coding on GPU.” Computer Physics Communications 185.10 (2014): 2467-2478.<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Ye Liang</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2019/03/14/avbmc/">
+        ← prev <!--AVBMC在WW模型上的效果测试-->
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2019/03/05/next-step-of-WW/">
+        <!--阶段反思-WW项目的下一步--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
+        </footer>
+        
+    </body>
+</html>
+
+
