@@ -64,7 +64,7 @@
 <h5 id="检查点三-形成-团簇的理由"><a href="#检查点三-形成-团簇的理由" class="headerlink" title="检查点三 形成+团簇的理由"></a>检查点三 形成+团簇的理由</h5><p>可能性1：AVBMC的swap有错，导致偏向产生+粒子。</p>
 <p>可能性2：AVBMC虽然不能增加+粒子，但是产生的构型有利于SF增加+粒子。</p>
 <h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><p><code>cluster_AVBR0.???_PB0.???_LWX?.?Y?.?Z?.?/</code> $Nstep=10^5$.</p>
-<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h5 id="检查点一的结果"><a href="#检查点一的结果" class="headerlink" title="检查点一的结果"></a>检查点一的结果</h5><p>远离相变点时，SF和AVBMC采样效率都很高，例如$T=3.0$和$T=1.5$，自关联时间非常短；$T=2.3$的自关联时间也有明显的下降。但是无论温度和阻挫以及AVBMC的两个参数怎么选，<strong>都没有观察到AVBMC自关联时间低于SF的自关联时间的情况</strong>。可以观察到，</p>
+<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h5 id="检查点一的结果"><a href="#检查点一的结果" class="headerlink" title="检查点一的结果"></a>检查点一的结果</h5><p>远离相变点时，SF和AVBMC采样效率都很高，例如$T=3.0$和$T=1.5$，自关联时间非常短；$T=2.3$的自关联时间也有明显的下降。但是无论温度和阻挫以及AVBMC的两个参数怎么选，<strong>都没有观察到AVBMC自关联时间低于SF的自关联时间的情况</strong>。</p>
 <h5 id="检查点二的结果"><a href="#检查点二的结果" class="headerlink" title="检查点二的结果"></a>检查点二的结果</h5><p>以$\langle 3\rangle$为初始构型的例子中，在$\kappa=0.07, T=2.20$点，末态构型没有显示出与$\langle 3\rangle$相似的周期性结构，也没有发现更长的一维周期性结构。末构与从P相出发的例子差别不大。这说明在这个温度非常近的附近不太可能存在$\langle 3\rangle$这样的相，但不能完全排除存在很长的长周期相的存在。</p>
 <h5 id="检查点三的结果"><a href="#检查点三的结果" class="headerlink" title="检查点三的结果"></a>检查点三的结果</h5><p>当设置$ABV Rate=1.0$的时候，从每个例子的轨迹看，总磁矩$M$成为恒定值。这说明AVBMC的swap确实能够保持$M$不变，而且如果混合SF的话也确实可以在正负两种构型下转换，所以程序本身应该没有问题。</p>
 <p>从自关联时间来看，单独使用AVBMC比单独使用快，虽然也没有快到可以用于FSS的程度。但是混合起来会变慢，</p>
@@ -106,24 +106,7 @@
             <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
         </footer>
         
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-</body>
+    </body>
 </html>
 
 
