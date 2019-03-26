@@ -33,7 +33,6 @@
             <p></p>
             <div id="follow-icons">
               </div>
-<h6><a href="/about">About</a></h6>
 <h6>---Tags---</h6>
 
 <h6><a href="/tags/Lecture-Notes/" <="" a="">Lecture Notes</a></h6>
@@ -68,7 +67,14 @@
 <li>6-边界定义下，AVBMC单独模拟($AVB Rate=1$)和与SF混合模拟的自关联时间能否降低？能否比SF单独模拟更低？</li>
 <li>6-边界AVBMC是否还会出现单独模拟($AVB Rate=1$)的自关联函数与混合模拟的自关联函数在$AVB Rate\to1$时存在不连续的情况？如果仍然存在，为什么？</li>
 </ol>
-<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><blockquote id="fn_1">
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>实验条件为$\kappa=0.07,T=2.20$，$Nstep=10^5$。AVBMC的参数设置为$P_\text{bias}=0.9$。</p>
+<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ol>
+<li>6-边界的定义可以降低边界占比。边界占比降到了0.6左右。这说明了使用6-边界比使用26-边界更合理。</li>
+<li>AVBMC单独模拟的自关联时间比SF单独模拟的自关联时间更低。</li>
+<li>当AVBMC与SF混合的时候，如果SF占主导，那么自关联时间会变长；如果AVBMC占主导，那么自关联函数短期下降得很快，但是下降到一定程度就变缓。这是因为能量大致是总磁矩的函数，SF能降低总磁矩，但是AVBMC不可以。如果是大量的AVBMC混入少量的SF，那么平均能量可能会有长期的缓慢变化；此外总磁矩的采样效率会显著降低。</li>
+</ol>
+<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><p>因为观察到AVBSwap会影响总磁矩M的采样，所以我们希望能够借用AVBMC的思想发展出直接翻转的算法。</p>
+<blockquote id="fn_1">
 <sup>1</sup>. 26-边界是一种定义边界的方法：若某个空位周围$3\times3\times3$的正方体中其他26个格点中存在至少一个粒子，那么这个空位就称为边界空位。全体边界空位的集合称为边界。类似地可以定义6-边界，6指最近邻的6个格点。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
 </blockquote>
 
