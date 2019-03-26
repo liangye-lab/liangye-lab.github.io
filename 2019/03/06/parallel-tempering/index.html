@@ -8,7 +8,7 @@
         <link rel="shortcut icon" href="">
         <link rel="canonical" href="http://github.com/">
         <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
-        <title>并行退火研究WW模型PF相变 | 实验记录</title>
+        <title>并行回火研究WW模型PF相变 | 实验记录</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -50,11 +50,11 @@
     </span>
   
 
-  <h1 class="post-title">并行退火研究WW模型PF相变</h1>
+  <h1 class="post-title">并行回火研究WW模型PF相变</h1>
   <section class="post-content article-entry">
-    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>之前的实验显示了在计算WW模型的PF相变温度的时候各种Wolff类型的cluster算法都会失效，主要问题在于采样效率非常低。可以确认cluster算法比single flip (SF)要快，只是对于做FSS还不够。所以我们想要在cluster算法的基础上增加并行退火来提速。</p>
-<p>之前的文献阅读看到现有的用于阻挫体系的cluster算法都非常专一，不是很适合WW模型。并行退火算是一种通用的技术手段可以加快采样效率。</p>
-<p>并行退火用在阻挫体系的PF相变可以参考<sup><a href="#fn_1" id="reffn_1">1</a></sup>。这篇文献的模型是EA自旋玻璃。其中使用并行退火和SF (Metropolis)。文章中引到另一篇文章<sup><a href="#fn_2" id="reffn_2">2</a></sup>指出对于各向同性的体系来说，可能SF会比cluster更有效。</p>
+    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>之前的实验显示了在计算WW模型的PF相变温度的时候各种Wolff类型的cluster算法都会失效，主要问题在于采样效率非常低。可以确认cluster算法比single flip (SF)要快，只是对于做FSS还不够。所以我们想要在cluster算法的基础上增加并行回火(parallel tempering)来提速。</p>
+<p>之前的文献阅读看到现有的用于阻挫体系的cluster算法都非常专一，不是很适合WW模型。并行回火算是一种通用的技术手段可以加快采样效率。</p>
+<p>并行回火用在阻挫体系的PF相变可以参考<sup><a href="#fn_1" id="reffn_1">1</a></sup>。这篇文献的模型是EA自旋玻璃。其中使用并行回火和SF (Metropolis)。文章中引到另一篇文章<sup><a href="#fn_2" id="reffn_2">2</a></sup>指出对于各向同性的体系来说，可能SF会比cluster更有效。</p>
 <p>我们主要模仿这篇文章的算法框架。算法本身容易理解，关键是其中的两个重要参数：一是replica的数量和温度间隔，二是PT交换的频率。</p>
 <p>按照这篇文章，replica的温度一般是等$\Delta \beta$，且使得交换两个相邻replica的接受概率在0.5左右。</p>
 <p>Replica的数目与尺寸有关！虽然应该随着尺寸的增加而增加，不过显然会收到计算资源的制约。在这篇文章中，replica的数目（replica或者temperature replica指温度的个数；realization或者disorder realization指的是自旋玻璃阻挫构型）。另有在GPU上并行的文章<sup><a href="#fn_3" id="reffn_3">3</a></sup>用了24、56个温度replica。看上去十几个replica就差不多了。</p>
@@ -109,7 +109,24 @@ T[(E_i,T_i)\to(E_{i+1},T_{i+1})] = \min\{1,exp[(E_{i+1}−E_i)(1/T_{i+1}−1/T_{
             <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
         </footer>
         
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
 
 

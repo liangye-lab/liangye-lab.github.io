@@ -8,7 +8,7 @@
         <link rel="shortcut icon" href="">
         <link rel="canonical" href="http://github.com/">
         <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
-        <title>2019年二月总结 | 实验记录</title>
+        <title>修正AVBMC算法中的边界定义 | 实验记录</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -40,24 +40,28 @@
         
 
 <article class="post">
-  March 2, 2019
+  March 26, 2019
   
     <span class="taglist">  &middot; 
     
     
-      <a href="/tags/月度总结/">月度总结</a> 
+      <a href="/tags/WW项目/">WW项目</a> 
     
     </span>
   
 
-  <h1 class="post-title">2019年二月总结</h1>
+  <h1 class="post-title">修正AVBMC算法中的边界定义</h1>
   <section class="post-content article-entry">
-    <p>二月的项目还是WW模型。总体来说，二月份主要做了两件事：说明Wolff类的cluster算法对WW模型不是很好用，以及写Prelim的文档。</p>
-<h3 id="工作方向"><a href="#工作方向" class="headerlink" title="工作方向"></a>工作方向</h3><p>现在有着比较充分的理由认为Wolff类型的cluster算法不是很好用，只能勉强算超低$\kappa$的有限尺度标度。显然这样是不够的。所以下面的方向是搜索替代算法。</p>
-<p>写document花了两周，几乎是全天工作。这次的教训是document最好在工作时间外写，并且给更多的时间。对于后面的slides，应该马上开始搭建并成形，但是不能占用白天的工作时间。</p>
-<h3 id="工作状态"><a href="#工作状态" class="headerlink" title="工作状态"></a>工作状态</h3><p>二月初的状态不是特别好。当时一直没有理解导师的意图，所以工作得很犹豫。在给出PF的cluster尺寸的图之后就比较顺畅了，当然也就开始写document了。</p>
-<p>对于写document，导师看上去也比较理解。当然导师给了很多建议，对此我心存感激。写document的第一周，写作效率很低。直到当周的周四熬了一夜，把很多内容重写了，周五中午才交初稿。周五导师发回意见，认为需要大调结构，但是周末却没有去动。直到第二周周一周二才调整完。之后导师说不需要他来改了，意味着大框架完成了，总体上应该是没有问题的。当然导师也提了一些意见，特别是针对motivation。这一点如果在后面评审的时候有出现疑问，我可以再补充。周四调了调格式，周五交了。当然中间其实还做了一个小实验，补了一个Wolff算法的小洞。总体来说第二周效率更高、工作强度更大一点。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总之，现在研究方向也明确了，知道了自己该看什么做什么，而且slides也需要做了。每天的计划很清楚了，希望三月份充实、顺利。</p>
+    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p><a href="/2019/03/22/avbmc-mod/">上一个AVBMC实验</a>发现在26-边界<sup><a href="#fn_1" id="reffn_1">1</a></sup>的定义下，边界空位数占全部空位数的比例常常接近1。这个现象说明可能在计算边界时程序存在错误，也可能说明26-边界的定义过高地计算了边界数。这次实验，我们将修改边界定义为6-边界，并且着重检查边界的计算代码。</p>
+<p>我们希望观察：</p>
+<ol>
+<li>6-边界能否降低边界占比？为什么能/不能？</li>
+<li>6-边界定义下，AVBMC单独模拟($AVB Rate=1$)和与SF混合模拟的自关联时间能否降低？能否比SF单独模拟更低？</li>
+<li>6-边界AVBMC是否还会出现单独模拟($AVB Rate=1$)的自关联函数与混合模拟的自关联函数在$AVB Rate\to1$时存在不连续的情况？如果仍然存在，为什么？</li>
+</ol>
+<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><h3 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h3><blockquote id="fn_1">
+<sup>1</sup>. 26-边界是一种定义边界的方法：若某个空位周围$3\times3\times3$的正方体中其他26个格点中存在至少一个粒子，那么这个空位就称为边界空位。全体边界空位的集合称为边界。类似地可以定义6-边界，6指最近邻的6个格点。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
 
   </section>
   <footer class="post-footer">
@@ -72,14 +76,10 @@
 
 <nav class="pagination" role="pagination">
     
-    <a class="newer-posts" href="/2019/03/05/next-step-of-WW/">
-        ← prev <!--阶段反思-WW项目的下一步-->
-    </a>
-    
     <span class="page-number">•</span>
     
-    <a class="older-posts" href="/2019/02/19/Lenka-talk/">
-        <!--Notes for Lenka's talk--> next →
+    <a class="older-posts" href="/2019/03/22/avbmc-mod/">
+        <!--改进的AVBMC算法的测试--> next →
     </a>
     
 </nav>
