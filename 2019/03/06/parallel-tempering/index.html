@@ -52,7 +52,7 @@
 
   <h1 class="post-title">并行回火研究WW模型PF相变</h1>
   <section class="post-content article-entry">
-    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>之前的实验显示了在计算WW模型的PF相变温度的时候各种Wolff类型的cluster算法都会失效，主要问题在于采样效率非常低。可以确认cluster算法比single flip (SF)要快，只是对于做FSS还不够。所以我们想要在cluster算法的基础上增加并行回火(parallel tempering)来提速。</p>
+    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>之前的实验显示了在计算WW模型的PF相变温度的时候各种Wolff类型的cluster算法都会失效，主要问题在于采样效率非常低。可以确认cluster算法比single flip (SF)要快，只是对于做FSS还不够。所以我们想要在cluster算法的基础上增加并行回火(parallel tempering)来提速。</p>
 <p>之前的文献阅读看到现有的用于阻挫体系的cluster算法都非常专一，不是很适合WW模型。并行回火算是一种通用的技术手段可以加快采样效率。</p>
 <p>并行回火用在阻挫体系的PF相变可以参考<sup><a href="#fn_1" id="reffn_1">1</a></sup>。这篇文献的模型是EA自旋玻璃。其中使用并行回火和SF (Metropolis)。文章中引到另一篇文章<sup><a href="#fn_2" id="reffn_2">2</a></sup>指出对于各向同性的体系来说，可能SF会比cluster更有效。</p>
 <p>我们主要模仿这篇文章的算法框架。算法本身容易理解，关键是其中的两个重要参数：一是replica的数量和温度间隔，二是PT交换的频率。</p>
@@ -65,10 +65,10 @@
 <script type="math/tex; mode=display">\begin{equation}
 T[(E_i,T_i)\to(E_{i+1},T_{i+1})] = \min\{1,exp[(E_{i+1}−E_i)(1/T_{i+1}−1/T_{i})]\}.
 \end{equation}</script></blockquote>
-<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><p>WidomWheelerPT, v1.0</p>
-<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>从初步的数据来看，PT可以加速，但是还不够。不知道调整参数是不是可以进一步加速。</p>
-<h3 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h3><p>需要获取更多关于参数设置的知识。</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><blockquote id="fn_1">
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><p>WidomWheelerPT, v1.0</p>
+<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>从初步的数据来看，PT可以加速，但是还不够。不知道调整参数是不是可以进一步加速。</p>
+<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><p>需要获取更多关于参数设置的知识。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote id="fn_1">
 <sup>1</sup>. Papakonstantinou, T., and A. Malakis. “Critical behavior of the three-dimensional Ising model with anisotropic bond randomness at the ferromagnetic-paramagnetic transition line.” Physical Review E 87.1 (2013): 012132.<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
 </blockquote>
 <blockquote id="fn_2">

@@ -52,17 +52,17 @@
 
   <h1 class="post-title">对PF相变的有限尺度标度计算</h1>
   <section class="post-content article-entry">
-    <h3 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h3><p>虽然在上一个实验中，改进的cluster算法(GC)比较成功，但是通过有限尺度体系的热容峰求相变温度仍然不够可靠。更专业的相变温度的计算方法仍然是有限尺度标度(finite size scaling, FSS)。</p>
+    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>虽然在上一个实验中，改进的cluster算法(GC)比较成功，但是通过有限尺度体系的热容峰求相变温度仍然不够可靠。更专业的相变温度的计算方法仍然是有限尺度标度(finite size scaling, FSS)。</p>
 <p>通过这部分计算，我们将能够以较高的精度得到PF相变的温度数值。</p>
-<h3 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h3><h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><h4 id="1-程序修改"><a href="#1-程序修改" class="headerlink" title="1. 程序修改"></a>1. 程序修改</h4><ol>
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h2 id="1-程序修改"><a href="#1-程序修改" class="headerlink" title="1. 程序修改"></a>1. 程序修改</h2><ol>
 <li>为了计算WW模型的FSS，首先要求磁矩的高阶矩。对于PF相变，磁矩很容易统计。程序需要增加对磁矩的统计。</li>
 <li>具体计算的时候，考虑好计算所需的步数。</li>
 </ol>
-<h4 id="2-kappa-0-07"><a href="#2-kappa-0-07" class="headerlink" title="2. $\kappa=0.07$"></a>2. $\kappa=0.07$</h4><ol>
+<h2 id="2-kappa-0-07"><a href="#2-kappa-0-07" class="headerlink" title="2. $\kappa=0.07$"></a>2. $\kappa=0.07$</h2><ol>
 <li>先算两个较小体系$N=10^3$和$N=20^3$，温度范围取1.5~3.0，步数取5e4次，看磁矩曲线的形状是否合理，看四阶矩的交点在什么地方。</li>
 <li>在这个交点附近继续算$N=30^3$、$N=40^3$以及$N=50^3$看看是否符合预期。</li>
 </ol>
-<h3 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h3><ul>
+<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><ul>
 <li><p>粗算：<code>coarse/cluster_L{Lx}_LWX-1.0Y-1.0Z-1.0/</code><br>Lx=10~40<br>T=1.5~3.0, dT=0.1<br>$\kappa$=0.07,0.08,0.09<br>n=1.0, 1.1, 1.2<br>Nstep=5e4</p>
 </li>
 <li><p>细算：<code>finer1/cluster_L{Lx}_LWX-1.0Y-1.0Z-1.0/</code><br>Lx=10~40<br>T=2.1~2.4, dT=0.01<br>$\kappa$=0.07,0.08,0.09<br>n=1.0, 1.1, 1.2<br>Nstep=1e5</p>
@@ -70,7 +70,7 @@
 <li><p>细算：<code>finer2/cluster_L{Lx}_LWX-1.0Y-1.0Z-1.0/</code><br>Lx=5, 10, 20<br>T=2.2~2.4, dT=0.01<br>$\kappa$=0.07<br>n=1.0<br>Nstep=2e6</p>
 </li>
 <li><p>细算：<code>finer2/cluster_L{Lx}_LWX-1.0Y-1.0Z-1.0/</code><br>Lx=5, 10, 20<br>T=2.19, 2.20, 2.21<br>$\kappa$=0.07<br>n=1.0<br>Nstep=1e7</p>
-<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><h4 id="kappa-0-07"><a href="#kappa-0-07" class="headerlink" title="$\kappa=0.07$"></a>$\kappa=0.07$</h4></li>
+<h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h2 id="kappa-0-07"><a href="#kappa-0-07" class="headerlink" title="$\kappa=0.07$"></a>$\kappa=0.07$</h2></li>
 </ul>
 <ol>
 <li><p>首先通过10、20和30三个尺寸下步数为5e4次的粗略计算得出$U_4$的交叉点温度应该在2.2到2.3之间。同时注意到误差特别大，需要增加步数。</p>
@@ -82,8 +82,8 @@
 <li><p>采用trivial parallel思路，算100个1e5达到算1个1e7的效果。完全可行。$N=5^3$和$N=10^3$几乎是秒出。这两个尺度下误差控制得还可以接受，清楚地看到交点在2.1935。<br>然而加上$N=20^3$的线之后发现三条线并不交于一点，三个交点分得很开。<br>加上$N=15^3$的线之后发现，后后三条线交于2.205(1)附近。尽管后三条线的误差还是很可观的，但是交点确实给的比较近了。<br>但是这里的统计误差不可忽视。改变cutoff后交点的位置也会改变，所以必须进一步提高精度。</p>
 </li>
 </ol>
-<h4 id="kappa-0-08"><a href="#kappa-0-08" class="headerlink" title="$\kappa=0.08$"></a>$\kappa=0.08$</h4><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>从目前的结果来看，Wolff算法在$\kappa=0.07$的时候靠近$T_c$时的采样效率比较差。这个现象出乎意料，因为我们至少认为在PF线上Wolff算法是可以用的。所以按照目前的结果，不能直接求出$U_4$。</p>
-<h3 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h3><p>搞清楚为什么Wolff算法在$\kappa=0.07$这样的低阻挫下都会显著降低效率。这需要(1)检查代码；(2)观察在相变点附近算法的表现，是不是产生了大的cluster。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>从目前的结果来看，Wolff算法在$\kappa=0.07$的时候靠近$T_c$时的采样效率比较差。这个现象出乎意料，因为我们至少认为在PF线上Wolff算法是可以用的。所以按照目前的结果，不能直接求出$U_4$。</p>
+<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><p>搞清楚为什么Wolff算法在$\kappa=0.07$这样的低阻挫下都会显著降低效率。这需要(1)检查代码；(2)观察在相变点附近算法的表现，是不是产生了大的cluster。</p>
 
   </section>
   <footer class="post-footer">

@@ -71,25 +71,29 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 400 !important;
 }
 h1 {
-	font-size: 2.5em;
+	font-size: 1.9em;
+  color: #5cc265;
 	line-height: 1.1em;
 	margin-top: 0.6em;
 	margin-bottom: 0.6em;
 }
 h2 {
-	font-size:1.9em;
+	font-size:1.7em;
+  color: #258fb8;
 	line-height: 1.2em;
 	margin-top: 0.7em;
 	margin-bottom: 0.7em;	
 }
 h3 {
 	font-size:1.4em;
+  color: #655fb8;
 	line-height: 1.3em;
 	margin-top: 0.8em;
 	margin-bottom: 0.8em;	
 }
 h4 {
 	font-size:1.3em;
+  color: #b54fb8;
 }
 h5 {
 	font-size:1.2em;
@@ -118,7 +122,7 @@ strong {
 blockquote {
 	border-left: 0.4em solid #eee;
 	padding-left: 1.2em;
-	font-size: 1.3em;
+	font-size: 0.8em;
 }
 hr{
  	border: 0;
@@ -194,6 +198,8 @@ article span.post-stamp {
 	color:#888;     
 }
 h1.post-title {
+  font-size: 2.5em;
+  color: #000;
 	margin-top:0.35em;
 	margin-bottom: 0.6em;
 }

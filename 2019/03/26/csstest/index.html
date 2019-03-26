@@ -8,7 +8,7 @@
         <link rel="shortcut icon" href="">
         <link rel="canonical" href="http://github.com/">
         <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
-        <title>修正AVBMC算法中的边界定义 | 实验记录</title>
+        <title>css测试 | 实验记录</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -42,25 +42,19 @@
 <article class="post">
   March 26, 2019
   
-    <span class="taglist">  &middot; 
-    
-    
-      <a href="/tags/WW项目/">WW项目</a> 
-    
-    </span>
-  
 
-  <h1 class="post-title">修正AVBMC算法中的边界定义</h1>
+  <h1 class="post-title">css测试</h1>
   <section class="post-content article-entry">
-    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p><a href="/2019/03/22/avbmc-mod/">上一个AVBMC实验</a>发现在26-边界<sup><a href="#fn_1" id="reffn_1">1</a></sup>的定义下，边界空位数占全部空位数的比例常常接近1。这个现象说明可能在计算边界时程序存在错误，也可能说明26-边界的定义过高地计算了边界数。这次实验，我们将修改边界定义为6-边界，并且着重检查边界的计算代码。</p>
-<p>我们希望观察：</p>
+    <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><p>正文<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
 <ol>
-<li>6-边界能否降低边界占比？为什么能/不能？</li>
-<li>6-边界定义下，AVBMC单独模拟($AVB Rate=1$)和与SF混合模拟的自关联时间能否降低？能否比SF单独模拟更低？</li>
-<li>6-边界AVBMC是否还会出现单独模拟($AVB Rate=1$)的自关联函数与混合模拟的自关联函数在$AVB Rate\to1$时存在不连续的情况？如果仍然存在，为什么？</li>
+<li>枚举</li>
+<li>枚举<blockquote>
+<p>引用<br>正文正文</p>
+</blockquote>
+</li>
 </ol>
-<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><blockquote id="fn_1">
-<sup>1</sup>. 26-边界是一种定义边界的方法：若某个空位周围$3\times3\times3$的正方体中其他26个格点中存在至少一个粒子，那么这个空位就称为边界空位。全体边界空位的集合称为边界。类似地可以定义6-边界，6指最近邻的6个格点。<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+<blockquote id="fn_1">
+<sup>1</sup>. 注释<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
 </blockquote>
 
   </section>
@@ -76,14 +70,10 @@
 
 <nav class="pagination" role="pagination">
     
-    <a class="newer-posts" href="/2019/03/26/csstest/">
-        ← prev <!--css测试-->
-    </a>
-    
     <span class="page-number">•</span>
     
-    <a class="older-posts" href="/2019/03/22/avbmc-mod/">
-        <!--改进的AVBMC算法的测试--> next →
+    <a class="older-posts" href="/2019/03/26/avb-change-boundary/">
+        <!--修正AVBMC算法中的边界定义--> next →
     </a>
     
 </nav>
