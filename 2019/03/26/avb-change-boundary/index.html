@@ -35,11 +35,11 @@
               </div>
 <h6>---Tags---</h6>
 
+<h6><a href="/tags/WW项目/" <="" a="">WW项目</a></h6>
+
 <h6><a href="/tags/月度总结/" <="" a="">月度总结</a></h6>
 
 <h6><a href="/tags/Lecture-Notes/" <="" a="">Lecture Notes</a></h6>
-
-<h6><a href="/tags/WW项目/" <="" a="">WW项目</a></h6>
 
 
         </header>
@@ -67,8 +67,19 @@
 <li>6-边界定义下，AVBMC单独模拟($AVB Rate=1$)和与SF混合模拟的自关联时间能否降低？能否比SF单独模拟更低？</li>
 <li>6-边界AVBMC是否还会出现单独模拟($AVB Rate=1$)的自关联函数与混合模拟的自关联函数在$AVB Rate\to1$时存在不连续的情况？如果仍然存在，为什么？</li>
 </ol>
-<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>实验条件为$\kappa=0.07,T=2.20$，$Nstep=10^5$。AVBMC的参数设置为$P_\text{bias}=0.9$。</p>
-<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ol>
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><p>WidomWheelerAVBMCSF, v3.3</p>
+<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>实验条件为$\kappa=0.07,T=2.20$，$Nstep=10^5$。AVBMC的参数设置为$P_\text{bias}=0.9$。</p>
+<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><p><code>cluster_AVBR?.??_PB0.900_LWX-1.0Y-1.0Z-1.0/</code></p>
+<h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h2 id="轨迹"><a href="#轨迹" class="headerlink" title="轨迹"></a>轨迹</h2><p><img src="/img/avbmc/single.png" alt="trajectory"><br>MC轨迹显示：</p>
+<ol>
+<li>能量轨迹显示，在纯AVBMC的模拟中，能量期望值与其他的混合了SF的模拟不同。这是因为纯AVBMC限制了总磁矩M不变，模拟的系综不同（或者说在期望的系综中破坏了遍历性）导致的。</li>
+<li>磁矩的轨迹显示，由于我们设定在前1/10的步数中使用纯SF达平，在过了1/10步数之后，纯AVBMC的模拟确实固定了M值。</li>
+<li>高AVB rate的磁矩的轨迹显得很“细”，说明采样效率很低。这是因为AVBMC不改变磁矩，使得总体上磁矩的变化减慢。</li>
+<li>边界占比（边界空位数占总空位数，$BLen/N^-$）在0.6左右，虽然没有降到$1/L$那么低，但是考虑到边界分形和“孤岛”的存在，勉强可以接受。这个比例比上一次AVBMC的测试中（比值几乎为1）降低不少，</li>
+</ol>
+<h2 id="自关联函数"><a href="#自关联函数" class="headerlink" title="自关联函数"></a>自关联函数</h2><p><img src="/img/avbmc/autocorr0.90_6bound.png" alt="autocorrelation" width="800"><br>随着AVBMC比例增加，自关联时间增加。AVBMC比例达到0.90时，可以看到自关联函数呈现为一个快速（指数）下降接一个多项式（近乎线性）下降的形状。</p>
+<p>指数下降部分应该归结为AVBMC的作用，在短期内快速退关联；线性部分应该是</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ol>
 <li>6-边界的定义可以降低边界占比。边界占比降到了0.6左右。这说明了使用6-边界比使用26-边界更合理。</li>
 <li>AVBMC单独模拟的自关联时间比SF单独模拟的自关联时间更低。</li>
 <li>当AVBMC与SF混合的时候，如果SF占主导，那么自关联时间会变长；如果AVBMC占主导，那么自关联函数短期下降得很快，但是下降到一定程度就变缓。这是因为能量大致是总磁矩的函数，SF能降低总磁矩，但是AVBMC不可以。如果是大量的AVBMC混入少量的SF，那么平均能量可能会有长期的缓慢变化；此外总磁矩的采样效率会显著降低。</li>
@@ -90,6 +101,10 @@
 </article>
 
 <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2019/03/29/avb-validation/">
+        ← prev <!--AVBMC算法的验证-->
+    </a>
     
     <span class="page-number">•</span>
     

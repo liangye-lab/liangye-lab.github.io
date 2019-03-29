@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="">
+        <link rel="canonical" href="http://github.com/">
+        <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
+        <title>AVBMC算法的验证 | 实验记录</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            
+            <h1><a href="/">Ye Liang</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6>---Tags---</h6>
+
+<h6><a href="/tags/WW项目/" <="" a="">WW项目</a></h6>
+
+<h6><a href="/tags/月度总结/" <="" a="">月度总结</a></h6>
+
+<h6><a href="/tags/Lecture-Notes/" <="" a="">Lecture Notes</a></h6>
+
+
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  March 29, 2019
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href="/tags/WW项目/">WW项目</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">AVBMC算法的验证</h1>
+  <section class="post-content article-entry">
+    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>在<a href="/2019/03/26/avb-change-boundary/">之前的实验</a>中，AVBMC算法给出了一些难以理解的现象。我们需要验证这些现象是由程序错误导致的，还是由算法的不足导致的，还是由模型本身的物理性质导致的。</p>
+<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h2 id="实验1-证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。"><a href="#实验1-证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。" class="headerlink" title="实验1 证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。"></a>实验1 证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。</h2><p>统计物理可以证明这个命题是正确的。这里通过模拟验证这个命题。</p>
+<p>我们首先从三维Ising模型开始验证($\kappa=0$)。在P相，$\langle|M|\rangle=0$。若待证明命题成立，那么只要将交换算法的初始M设为0即可获得等价采样。考虑到有限尺寸效应，在$T_c\approx4.512$之上一小段温度区间内仍不为零。我们将先使用Single Flip (SF)算法和Simple Swap (SW)算法，然后看AVB的结果。</p>
+<p>之后，我们在WW模型$\kappa=0.07,T\sim2.2$处验证。</p>
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><p>WidomWheelerSingleFlip<br>WidomWheelerSimpleSwap<br>WidomWheelerAVBMCSF</p>
+<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h2 id="实验1"><a href="#实验1" class="headerlink" title="实验1"></a>实验1</h2><p>三维Ising模型在$T=5.0$时，若是无穷大尺寸，则应该完美地处于P相，$M=0$。有限尺寸$N=24^3$下，SF采样的结果是有0.006%的M（统计误差内不为0）。这时SF给出的能量（指单位粒子能量，下同）为-0.75780±5，而SW给出的能量为-0.75557±5，SW的能量均值比SF高出0.00223（大约3‰）。在$T=6.0$时，SF的$M/N$为0.00016，SF能量为-0.57166±4，SW能量为-0.57079±4，SW能量高0.00087（大约1.5‰）我们可以看到两者能量略有差异，而且随着温度的升高差异在降低。</p>
+<p>对于WW模型，在$T=6.0$时，无论从MF还是从早期MC研究，都应该处于P相。SF给出的M/N=0.00000±2，能量为-0.42426±3，SW给出的能量为-0.42407±3，SW能量比SF高0.00019（大约0.44‰）。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Ye Liang</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2019/03/26/avb-change-boundary/">
+        <!--修正AVBMC算法中的边界定义--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
+        </footer>
+        
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
+
+
