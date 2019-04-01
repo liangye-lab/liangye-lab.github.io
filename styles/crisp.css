@@ -340,8 +340,16 @@ footer a:hover {
   margin: 0;
   width: auto;
 }
+th, td {
+  border: 1px solid lightgrey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table{
+  border-collapse: collapse;
+  border: 2px solid lightgrey;
+}
 .article-entry .highlight td {
-  border: none;
   padding: 0;
 }
 .article-entry .highlight figcaption {
