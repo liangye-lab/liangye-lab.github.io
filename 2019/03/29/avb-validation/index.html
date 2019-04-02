@@ -64,7 +64,9 @@
 <h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h2 id="实验1-证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。"><a href="#实验1-证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。" class="headerlink" title="实验1 证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。"></a>实验1 证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。</h2><p>统计物理可以证明这个命题是正确的。这里通过模拟验证这个命题。</p>
 <p>我们首先从三维Ising模型开始验证($\kappa=0$)。在P相，无穷大体系$m=\langle|M|\rangle/N=0$。若待证明命题成立，那么只要将交换算法的初始M设为0即可获得等价采样。考虑到有限尺寸效应，在$T_c\approx4.512$之上一小段温度区间内仍不为零。我们将先使用Single Flip (SF)算法和Simple Swap (SW)算法，然后看AVB的结果。</p>
 <h2 id="实验2-在-kappa-0-07-T-sim2-2-处验证SF和SW。"><a href="#实验2-在-kappa-0-07-T-sim2-2-处验证SF和SW。" class="headerlink" title="实验2 在$\kappa=0.07,T\sim2.2$处验证SF和SW。"></a>实验2 在$\kappa=0.07,T\sim2.2$处验证SF和SW。</h2><p>在$T=2.2$处，SF由于临界降速，得不到准确的能量均值，所以我们取一个稍微高于$T_c$的温度。早期的模拟观察到在$T=2.3$下采样受到临界降速的影响比在$T=2.2$时小很多。虽然实验1的命题应该在所有温度下都成立，但是在临界温度上，准确的M难以得到，所以可能SW难以得到准确的结果。这里我们需要观察SF和SW的差别可以有多大。</p>
-<h2 id="实验3-验证SF和SW以及其混合算法的自关联时间。"><a href="#实验3-验证SF和SW以及其混合算法的自关联时间。" class="headerlink" title="实验3 验证SF和SW以及其混合算法的自关联时间。"></a>实验3 验证SF和SW以及其混合算法的自关联时间。</h2><p>在实验1和2的基础上很容易观察</p>
+<h2 id="实验3-验证SF和SW以及其混合算法的自关联时间。"><a href="#实验3-验证SF和SW以及其混合算法的自关联时间。" class="headerlink" title="实验3 验证SF和SW以及其混合算法的自关联时间。"></a>实验3 验证SF和SW以及其混合算法的自关联时间。</h2><p>我们希望比较在临界温度附近SF与SW的效率。这样我们必须精确地得到SF采样下在$\kappa=0.07,T=2.2$处的M，从而进行对应的SW采样。</p>
+<p><a href="/2019/03/26/avb-change-boundary/">之前实验</a>中做的SF与AVBMC的自关联函数的比较原理是是错误的，因为采样不一致。那么如果得到了比较精确的M值，再跑对应的SW，那么自关联函数是什么样子呢？在高温下SW不如SF高效，低温下SW与SF效率几乎相同（实际上SW可以再提高），而在临界点时，实验2反映SW的效率比SF高（自关联时间短）。这在结果上和之前SF对比AVBMC的用错误的方法得到的结果很接近。那么自然我们也要想，会不会在SW和SF混合的时候也会出现AVBMC和SF混合的结果呢？我们需要数值验证。如果确实是这样的，那么我们需要理解为什么Swap算法和SF混合后效率降低。</p>
+<p>一个猜想是，在临界点附近，尽管纯AVBMC可能比现在的SW效率稍高，但是混合的时候止不住SF在改变M，造成采样的基线在变化，特别是在高AVB rate的时候。<strong>最终可能我们只能够搞清楚为什么AVBMC+SF不适用。</strong></p>
 <h2 id="实验4-考察AVBMC的自关联时间。"><a href="#实验4-考察AVBMC的自关联时间。" class="headerlink" title="实验4 考察AVBMC的自关联时间。"></a>实验4 考察AVBMC的自关联时间。</h2><ol>
 <li>AVBMC的自关联时间应该比SW高。</li>
 <li>AVBMC与SF混合的效率和SW与SF混合如何比较？</li>
@@ -78,9 +80,7 @@
 <th>T</th>
 <th>$\tau_M$(SF)</th>
 <th>$\tau_E$(SF)</th>
-<th>$</th>
-<th>M</th>
-<th>$(SF)</th>
+<th>&#124;M&#124;(SF)</th>
 <th>E(SF)</th>
 <th>E(SW)</th>
 </tr>
@@ -114,9 +114,7 @@
 <thead>
 <tr>
 <th>T</th>
-<th>$</th>
-<th>M</th>
-<th>$(SF)</th>
+<th>&#124;M&#124;(SF)</th>
 <th>E(SF)</th>
 <th>M(SW)</th>
 <th>E(SW)</th>
@@ -151,16 +149,14 @@
 <p>在$T=6.0$时，由SF模拟可知$N=24^3$的体系中$M=135.2(2)$；设置SW的$M=136$（因为翻转一个spin使得M变化2，所以M只能为偶数）。SW能量为-0.42421(3)。在$T=10.0$时，SF得到$|M|=115.7(3)$；设置SW的$M=116$，得到能量为-0.27134(3)。我们还补充了$T=3.0$时的采样结果，得到了可以接受的能量期望值。这样基本上两个模拟的能量就在误差限内了（毕竟磁矩不完全相等）。</p>
 <h2 id="实验2-对WW模型在-kappa-0-07-T-sim2-2-处验证"><a href="#实验2-对WW模型在-kappa-0-07-T-sim2-2-处验证" class="headerlink" title="实验2 对WW模型在$\kappa=0.07,T\sim2.2$处验证"></a>实验2 对WW模型在$\kappa=0.07,T\sim2.2$处验证</h2><p>在$T=2.2$，SF给出的$|M|=5.4(1)\times10^3$，$\tau_M=250$，能量是-1.194(2)，$\tau_E=500$。在这个相点关联太强影响太大，简单的Bootstrap都得不到很稳定的结果，所以这里的误差都是直接估计的(Newman 3.4.1)。SW在$M=5426$时能量是-1.18546(4)，在$M=5428$时能量为-1.18557(4)，在$M=5366$时的能量是-1.18416(4)。</p>
 <p>AVBMC在$M=5426$时给出能量-1.18554(4)，和SW基本一致。</p>
-<p>我们再选择$T=2.3$验证，因为这个温度下采样的效率比$T=2.2$高很多，结果也更可靠。SF给出的$|M|=849(1)$，能量是-1.05114(4)。SW给出的能量为-1.05041(4) </p>
+<p>我们再选择$T=2.3$验证，因为这个温度下采样的效率比$T=2.2$高很多，结果也更可靠。SF给出的$|M|=8.5(2)\times10^2$，能量是-1.0512(1)。SW给出的能量为-1.0503(1) ，基本上相差在误差范围内。这些差别都可以归结为M设置不完全等于SF的采样期望。</p>
 <div class="table-container">
 <table>
 <thead>
 <tr>
 <th>T</th>
 <th>$\tau_M$</th>
-<th>$</th>
-<th>M</th>
-<th>$(SF)</th>
+<th>&#124;M&#124;(SF)</th>
 <th>$\tau_E$</th>
 <th>E(SF)</th>
 <th>M(SW)</th>
@@ -202,14 +198,73 @@
 <td>3.4</td>
 <td>-0.99044(9)</td>
 <td>548</td>
-<td>-</td>
+<td>-0.99025(9)</td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>表3: WW模型在$\kappa=0.07,T=2.2$下SF与SW的采样结果。因为磁矩的采样误差比较大（靠近临界点的必然结果），所以很难找到恰当的磁矩使SW刚好与SF采样等价。$T=2.1,2.3$采样效率比较高，得到的能量结果差别与误差处于同一范围，大致可以接受。</p>
-<p>以上所有的模拟都运行了$2\times10^5$，但是对于$T=2.2$我们需要更大的样本集来得到SF的M。</p>
-<h2 id="实验3-验证SW和AVBMC给出同样的分布。"><a href="#实验3-验证SW和AVBMC给出同样的分布。" class="headerlink" title="实验3 验证SW和AVBMC给出同样的分布。"></a>实验3 验证SW和AVBMC给出同样的分布。</h2><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
+<p>以上所有的模拟都运行了$2\times10^5$，但是对于$T=2.2$我们需要更大的样本集来得到SF的M。运行SF $1\times10^7$次（集群CPU时间5.3小时），按照之前计算的$\tau_M$，得到$|M|=5371(16)$，精确度比原来提升了一个数量级；能量期望为-1.1919(2)。SW在M=5370下给出的能量为-1.1849(8)。多次尝试不同的M的SW结果见表4。实际上与SF结果的能量期望接近的是M=5700的SW。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>T</th>
+<th>$\tau_M$</th>
+<th>&#124;M&#124;</th>
+<th>$\tau_E$</th>
+<th>E</th>
+<th>sampling methond</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.2</td>
+<td>500</td>
+<td>5371(16)</td>
+<td>250</td>
+<td>-1.1919(2)</td>
+<td>SF</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>-</td>
+<td>5370</td>
+<td>60</td>
+<td>-1.1849(8)</td>
+<td>SW</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>-</td>
+<td>5426</td>
+<td>-</td>
+<td>-1.186(1)</td>
+<td>SW</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>-</td>
+<td>5500</td>
+<td>-</td>
+<td>-1.1866(9)</td>
+<td>SW</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>-</td>
+<td>5700</td>
+<td>-</td>
+<td>-1.1918(5)</td>
+<td>SW</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>表4: WW模型在$\kappa=0.07, T=2.2$下SW尝试不同的M值的采样结果。</p>
+<p>但是，不管M值设定为多少，只要大致在SF的M期望的周围，其能量自关联函数就相差不大：<br><img src="/img/avbmc/compare_SF_SW.png" alt="compare SF and SW" width="800"></p>
+<h2 id="实验3"><a href="#实验3" class="headerlink" title="实验3"></a>实验3</h2><h2 id="实验4"><a href="#实验4" class="headerlink" title="实验4"></a>实验4</h2><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>实验1和实验2的结论：在临界点($\kappa=0.07,T=2.2$)时，SW确实比SF有更短的自关联时间。</p>
+<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
   </section>
   <footer class="post-footer">
     <!--
