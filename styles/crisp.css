@@ -346,9 +346,23 @@ th, td {
   padding: 5px;
 }
 table{
+  width: 100%;
+  max-width: 50em;
   border-collapse: collapse;
   border: 2px solid lightgrey;
+  empty-cells: show;
 }
+table th {/*表头*/
+    /*font-weight: bold; */
+    /*text-align: center !important;*/
+    background: #dddddd; /*背景色*/
+}
+table tbody tr:nth-child(2n) {
+    background: rgba(158,188,226,0.3);
+}
+/*table tr:hover {
+    background: #2fef2f;
+}*/
 .article-entry .highlight td {
   padding: 0;
 }

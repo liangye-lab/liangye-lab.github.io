@@ -8,7 +8,7 @@
         <link rel="shortcut icon" href="">
         <link rel="canonical" href="http://github.com/">
         <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
-        <title>AVBMC算法的验证 | 实验记录</title>
+        <title>Swap算法的验证 | 实验记录</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -58,7 +58,7 @@
     </span>
   
 
-  <h1 class="post-title">AVBMC算法的验证</h1>
+  <h1 class="post-title">Swap算法的验证</h1>
   <section class="post-content article-entry">
     <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>在<a href="/2019/03/26/avb-change-boundary/">之前的实验</a>中，AVBMC算法给出了一些难以理解的现象。我们需要验证这些现象是由程序错误导致的，还是由算法的不足导致的，还是由模型本身的物理性质导致的。</p>
 <h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h2 id="实验1-证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。"><a href="#实验1-证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。" class="headerlink" title="实验1 证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。"></a>实验1 证明：在变M和恒M系综下，只要恒M设置为变M的M期望，则采样等价。</h2><p>统计物理可以证明这个命题是正确的。这里通过模拟验证这个命题。</p>
@@ -66,11 +66,6 @@
 <h2 id="实验2-在-kappa-0-07-T-sim2-2-处验证SF和SW。"><a href="#实验2-在-kappa-0-07-T-sim2-2-处验证SF和SW。" class="headerlink" title="实验2 在$\kappa=0.07,T\sim2.2$处验证SF和SW。"></a>实验2 在$\kappa=0.07,T\sim2.2$处验证SF和SW。</h2><p>在$T=2.2$处，SF由于临界降速，得不到准确的能量均值，所以我们取一个稍微高于$T_c$的温度。早期的模拟观察到在$T=2.3$下采样受到临界降速的影响比在$T=2.2$时小很多。虽然实验1的命题应该在所有温度下都成立，但是在临界温度上，准确的M难以得到，所以可能SW难以得到准确的结果。这里我们需要观察SF和SW的差别可以有多大。</p>
 <h2 id="实验3-验证SF和SW以及其混合算法的自关联时间。"><a href="#实验3-验证SF和SW以及其混合算法的自关联时间。" class="headerlink" title="实验3 验证SF和SW以及其混合算法的自关联时间。"></a>实验3 验证SF和SW以及其混合算法的自关联时间。</h2><p>我们希望比较在临界温度附近SF与SW的效率。这样我们必须精确地得到SF采样下在$\kappa=0.07,T=2.2$处的M，从而进行对应的SW采样。</p>
 <p><a href="/2019/03/26/avb-change-boundary/">之前实验</a>中做的SF与AVBMC的自关联函数的比较原理是是错误的，因为采样不一致。那么如果得到了比较精确的M值，再跑对应的SW，那么自关联函数是什么样子呢？在高温下SW不如SF高效，低温下SW与SF效率几乎相同（实际上SW可以再提高），而在临界点时，实验2反映SW的效率比SF高（自关联时间短）。这在结果上和之前SF对比AVBMC的用错误的方法得到的结果很接近。那么自然我们也要想，会不会在SW和SF混合的时候也会出现AVBMC和SF混合的结果呢？我们需要数值验证。如果确实是这样的，那么我们需要理解为什么Swap算法和SF混合后效率降低。</p>
-<p>一个猜想是，在临界点附近，尽管纯AVBMC可能比现在的SW效率稍高，但是混合的时候止不住SF在改变M，造成采样的基线在变化，特别是在高AVB rate的时候。<strong>最终可能我们只能够搞清楚为什么AVBMC+SF不适用。</strong></p>
-<h2 id="实验4-考察AVBMC的自关联时间。"><a href="#实验4-考察AVBMC的自关联时间。" class="headerlink" title="实验4 考察AVBMC的自关联时间。"></a>实验4 考察AVBMC的自关联时间。</h2><ol>
-<li>AVBMC的自关联时间应该比SW高。</li>
-<li>AVBMC与SF混合的效率和SW与SF混合如何比较？</li>
-</ol>
 <h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><p>WidomWheelerSingleFlip v1.0<br>WidomWheelerSimpleSwap<br>WidomWheelerAVBMCSF</p>
 <h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h2 id="实验1-SF与SW"><a href="#实验1-SF与SW" class="headerlink" title="实验1 SF与SW"></a>实验1 SF与SW</h2><p>三维Ising模型在$T=5.0$时，若是无穷大尺寸，则应该完美地处于P相，$|M|=0$。有限尺寸$N=24^3$下，两种方法采样的结果见表1。SF采样的结果是有0.03%的$|M|$（统计误差内不为0）。这时SF给出的能量（指单位粒子能量，下同）为-0.7578(2)，而SW给出的能量为-0.7556(1)，SW的能量均值比SF高出0.0022（大约3‰）。在$T=6.0$时，SF的$|M|/N$为0.00016，SF能量为-0.57167(5)，SW能量为-0.57078(5)，SW能量高0.00089（大约1.5‰）。我们可以看到两者能量略有差异，而且随着温度的升高差异在降低。</p>
 <div class="table-container">
@@ -263,8 +258,11 @@
 </div>
 <p>表4: WW模型在$\kappa=0.07, T=2.2$下SW尝试不同的M值的采样结果。</p>
 <p>但是，不管M值设定为多少，只要大致在SF的M期望的周围，其能量自关联函数就相差不大：<br><img src="/img/avbmc/compare_SF_SW.png" alt="compare SF and SW" width="800"></p>
-<h2 id="实验3"><a href="#实验3" class="headerlink" title="实验3"></a>实验3</h2><h2 id="实验4"><a href="#实验4" class="headerlink" title="实验4"></a>实验4</h2><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>实验1和实验2的结论：在临界点($\kappa=0.07,T=2.2$)时，SW确实比SF有更短的自关联时间。</p>
-<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
+<h2 id="实验3-SF与SW的混合"><a href="#实验3-SF与SW的混合" class="headerlink" title="实验3 SF与SW的混合"></a>实验3 SF与SW的混合</h2><p>不出意外地，混合算法的自关联函数依然呈现出先上升后下降的现象。和导师细谈之后，发觉确实在临界温度上使用SF+SW没有意义。SF本身的自关联时间非常长，意味着算法本身难以平衡系统，这样一切平衡态统计量就没有意义了。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>实验1的结论：若设SW算法的M为SF在同一条件下的M的期望，那么SW能够给出相同的采样分布。<br>实验2的结论：在临界点($\kappa=0.07,T=2.2$)时，SW确实比SF有更短的自关联时间。<br>实验3的结论：在临界点比较SF和SW没有意义，我应该在稍远离临界点的温度下，确保算法能够使系统达到平衡以后，再计算平衡态可观测量。</p>
+<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><p>显然，我应该临界点之外选择一些温度点，测试SF和AVBMC。我可以用三条判据来说明算法达到平衡。在确保平衡的情况下，我可以计算对应的量包括自关联时间进行比较。</p>
+<p>我特殊关注cluster算法造成大团簇的温度区间。我们之前认为造成大团簇意味着长关联长度。这会使得像SF这样的算法在这个区域严重失效，如同在临界点上一样。但是我读过一些文章，认为这个地方的Wolff类算法不能够正确反映关联长度。也就是说SF这样的算法在这个区间运行良好是正常的。我之前没有对此进行记录。显然我需要将这样的陈述记录整理一下，并且最好弄清楚为什么。</p>
+
   </section>
   <footer class="post-footer">
     <!--
