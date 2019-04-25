@@ -35,11 +35,19 @@
               </div>
 <h6>---Tags---</h6>
 
-<h6><a href="/tags/月度总结/" <="" a="">月度总结</a></h6>
-
 <h6><a href="/tags/WW项目/" <="" a="">WW项目</a></h6>
 
+<h6><a href="/tags/WW模型/" <="" a="">WW模型</a></h6>
+
+<h6><a href="/tags/月度总结/" <="" a="">月度总结</a></h6>
+
 <h6><a href="/tags/Lecture-Notes/" <="" a="">Lecture Notes</a></h6>
+
+<h6><a href="/tags/科学写作/" <="" a="">科学写作</a></h6>
+
+<h6><a href="/tags/Review/" <="" a="">Review</a></h6>
+
+<h6><a href="/tags/阅读列表/" <="" a="">阅读列表</a></h6>
 
 
         </header>
@@ -60,9 +68,19 @@
 
   <h1 class="post-title">在cluster算法生成大团簇的温度区间内比较SF、AVBMC和cluster算法</h1>
   <section class="post-content article-entry">
-    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>之前的实验让我意识到在临界点上测试AVBMC是行不通的。而cluster算法在远离临界点时就可能形成不合理的巨大的团簇。我们就在这个区域内测试AVBMC并和SF、cluster算法进行比较。</p>
-<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><p>WidomWheelerAVBMCSF<br>WidomWheelerSingFlip v1.0<br>WidomWheelerCluster v1.1.2</p>
-<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
+    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>之前的实验让我意识到在临界点上测试AVBMC是行不通的。而cluster算法在远离临界点时就可能形成不合理的巨大的团簇。我们就应该在这个区域内测试AVBMC并和SF、cluster算法进行比较。</p>
+<p>在这个区域内，cluster算法形成大的团簇被认为是“体现了长程关联”。对此虽然我暂时保留意见（因为我只有见过别的文献意见，没有证据），但是假定以此为认识基础，在此区域内，SF算法应该当然地失效，体现为难以获得“真正”的或者“完整”的采样；即使从能量上看，轨迹没有显著的drift，自关联时间非常短，并且多次模拟最后得到的能量期望差别小于误差限，仍然有可能是每次采样落在了不同的差别极小的能量（近）简并态中。（我认为即便观察M可能也会发现M相等。）</p>
+<p>除了观察物理量的相关性质，我还可以直接观察系统的演化movie。虽然我直观地观察到在$\kappa=0.07,T=3.0$时，体系有中等大小的团簇（用SF算法），既不是像Ising临界点那样形成大的明显的分形图案，也不像是在高温下彻底的随机。我看到这些团簇的边界在流动（快速变化，但是仍然能够辨认出团簇的逐渐形变）。当然要比较构型改变的快慢，就要设定参考的对象。这一点我尚无参照。有可能看上去快速的团簇流动相比Ising模型在相同温度下的变化还是慢很多，意味着仍然没有办法判定这里算法达到了平衡。</p>
+<p>以上是两点对我自己关切的问题的目前的解答。我认为这样的答案确实可以接受。但是这个解答可能不是最终答案。我应该先按着这个答案的思路走，如果能够发现问题解决问题当然是非常好，如果发现矛盾，这个解答可能还需要被重新审视。</p>
+<p>那么，按照这个解答的逻辑，我们需要研究目标区域内的演化情况。首先，我仍然不知道如何判断在这个区域内达到平衡。我可以从绝对高温开始，一步一步向这个区域逼近。在绝对高温时我可以判断达平。当温度逐渐降低的时候，虽然没法判断达平，但是所有物理量变化的趋势是可以感受的。这个工作是可以做的。</p>
+<p>与此同时，我可以观察系统的演化，重点是系统的逾渗概率。</p>
+<p>为什么要研究逾渗问题呢？</p>
+<p>我知道的是，SW和Wolff这样的cluster算法与逾渗(percolation)问题有着重大的关系。那么这些cluster算法的成功与失败一定与逾渗问题、系统的逾渗状态有着重大的关系。我需要搞清楚这个关系是什么。什么情况下cluster算法会失败？系统逾渗与否对此有何影响？如果说逾渗概率是其中cluster算法发挥作用的一个关键指标，那么计算逾渗概率显然会帮助我们发现cluster算法失效的问题所在，以及开发新算法的途径。</p>
+<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>计算在$\kappa=0.07, T&gt;2.2$区域内SF、AVBMC以及cluster算法的各种轨迹及关联时间。 </p>
+<h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><p>计算得到，AVBMC+SF在温度$T=6$（在大cluster区外）时，AVBMC与SF的自关联时间都很短（小于2），并且显著地体现出：当AVB占的比例增大时，自关联时间递减。Monte Carlo能量轨迹显示AVBMC的能量期望与SF符合，不仅没有显示出大的drift，并且平衡时间也很短。在这个区域内，我们认为达到平衡是没有问题的。这说明AVB在这个区域是能够改善SF采样效率的。<br><img src="/img/avbmc/T6.png" alt="T6" width="800"></p>
+<p>但是令人惊讶的是在这个区域，比较磁化强度M的采样效率，随着AVB比例增加，自关联时间也增加。我推测这是因为AVBMC只能产生新的能量构型，不能够产生新的磁化强度的构型。这个观点是很容易理解的。</p>
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><p>WidomWheelerAVBMCSF<br>WidomWheelerSingFlip v1.0<br>WidomWheelerCluster v1.1.2</p>
+<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
   </section>
   <footer class="post-footer">
     <!--
@@ -75,6 +93,10 @@
 </article>
 
 <nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2019/04/05/reading-notes/">
+        ← prev <!--阅读笔记-->
+    </a>
     
     <span class="page-number">•</span>
     

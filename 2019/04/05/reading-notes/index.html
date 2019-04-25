@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="">
+        <link rel="canonical" href="http://github.com/">
+        <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
+        <title>阅读笔记 | 实验记录</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            
+            <h1><a href="/">Ye Liang</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6>---Tags---</h6>
+
+<h6><a href="/tags/WW项目/" <="" a="">WW项目</a></h6>
+
+<h6><a href="/tags/WW模型/" <="" a="">WW模型</a></h6>
+
+<h6><a href="/tags/月度总结/" <="" a="">月度总结</a></h6>
+
+<h6><a href="/tags/Lecture-Notes/" <="" a="">Lecture Notes</a></h6>
+
+<h6><a href="/tags/科学写作/" <="" a="">科学写作</a></h6>
+
+<h6><a href="/tags/Review/" <="" a="">Review</a></h6>
+
+<h6><a href="/tags/阅读列表/" <="" a="">阅读列表</a></h6>
+
+
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  April 5, 2019
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href="/tags/Lecture-Notes/">Lecture Notes</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">阅读笔记</h1>
+  <section class="post-content article-entry">
+    <h1 id="Percolation和cluster-algorithm的联系"><a href="#Percolation和cluster-algorithm的联系" class="headerlink" title="Percolation和cluster algorithm的联系"></a>Percolation和cluster algorithm的联系</h1><h2 id="Introduction-to-Percolation-Theory"><a href="#Introduction-to-Percolation-Theory" class="headerlink" title="Introduction to Percolation Theory"></a><em>Introduction to Percolation Theory</em></h2><p>关于Kasteleyn and Fortuin说明bond probability重要的描述</p>
+<blockquote>
+<p>The simple definition of a cluster as a group of neighbouring parallel spins turns out to be wrong: in the simple cubic lattice the up spins already percolate at a temperature several per cent below the critical temperature, at a point when less than 1/4 of all spins point up. This result is somewhat plausible from the fact mentioned earlier (see, e.g., the Bethe lattice result) that the percolation threshold goes to zero if the number of neighbours goes to infinity. Thus, provided that the number of neighbours is sufficiently large, the percolation temperature is allowed to be far below the Curie temperature, since at the latter half the spins always point up in the zero field. 不能简单地将cluster算法和site percolation模型的cluster对应起来。</p>
+<p>This error was corrected by the Coniglio-Klein definition, based on a theorem of Kasteleyn and Fortuin: two up spins are regarded as part of the same droplet only if they are connected by an additional bond. These additional bonds are distributed randomly in the lattice between parallel neighbours, with a bond probability $\pi=1-\exp(-2J/kT)$. These additional bonds do not enter the interaction energy, they just serve to define droplets appropriately. (The analogous definition was later applied also to down spins.) We thus have here a random bond percolation superimposed on the Ising-correlated site lattice of occupied and empty places. With this definition the Curie temperature, i.e. the critical point, agrees with the percolation threshold, and also the three other criteria above are fulfilled in zero field $H$; the spontaneous magnetization at zero field is given by the size of the infinite droplet. Simulations also showed the typical droplet radius to agree with the correlation length; at the Curie point these droplets are fractal with a radius increasing as a power of $s$ and a fractal dimension 2.5 on the cubic lattice. Theoretically we expect again $D=d-\beta/\nv$ with, however, the Ising analogues of $\beta$, $\nu$, which differ slightly from percolation: $D=2.53$ instead of $2.48$. Thus in zero field every thing seems fine, … 这样建立cluster算法和另一个逾渗模型对应起来。</p>
+</blockquote>
+<h2 id="Precolation-clusters-and-phase-transitions-in-spin-models"><a href="#Precolation-clusters-and-phase-transitions-in-spin-models" class="headerlink" title="Precolation, clusters, and phase transitions in spin models"></a><em>Precolation, clusters, and phase transitions in spin models</em></h2><p>应该有spin的site看做occupied，没有spin的site看做unoccupied，而不是按照符号来区分有无占据。这样非diluted模型都是全占据的，我研究的WW也是全占据的lattice。这样，lattice模型mapping到一个bond-correlated percolation model (BCPM)。</p>
+<h2 id="Finite-size-effects-on-phase-transitions-by-K-Binder"><a href="#Finite-size-effects-on-phase-transitions-by-K-Binder" class="headerlink" title="Finite size effects on phase transitions by K. Binder"></a>Finite size effects on phase transitions by K. Binder</h2><p>There are several motivations why it is interesting to study finite size effects on phase transitions: first of all, statistical mechanics tells us that a singular behaviour of the free energy, and hence a sharp phase transition, can occur only in the thermodynamic limit, $N\to\infty$. In a finite system, the free enera is regular, and there simply is no phase transition whatsoever!</p>
+<p>The practical answer to this question, of course, is that the transition in the finite system is rounded and shifted over some parameter region: this region smoothly shrinks to zero as $N\to\infty$.</p>
+<p>Both first- and second-order transitions get smeared and shifted due to the finite size of a sample. 一级和二级相变都会有有限尺度效应。</p>
+<p>It must be emphasized, however, that all this work is theoretical in character, either analytical or by means of computer experiments.</p>
+<h2 id="Finite-size-scaling的一些定义"><a href="#Finite-size-scaling的一些定义" class="headerlink" title="Finite size scaling的一些定义"></a>Finite size scaling的一些定义</h2><p><a href="https://www.mv.helsinki.fi/home/rummukai/simu/fss.pdf" target="_blank" rel="noopener">https://www.mv.helsinki.fi/home/rummukai/simu/fss.pdf</a></p>
+
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Ye Liang</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <a class="newer-posts" href="/2019/04/06/microemulsion/">
+        ← prev <!--Microemulsion领域研究进展与研究问题（草稿）-->
+    </a>
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2019/04/04/large-cluster-forming-region/">
+        <!--在cluster算法生成大团簇的温度区间内比较SF、AVBMC和cluster算法--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
+        </footer>
+        
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="">
+        <link rel="canonical" href="http://github.com/">
+        <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
+        <title>AVB在PF线以上采样效率的测试 | 实验记录</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            
+            <h1><a href="/">Ye Liang</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6>---Tags---</h6>
+
+<h6><a href="/tags/WW项目/" <="" a="">WW项目</a></h6>
+
+<h6><a href="/tags/WW模型/" <="" a="">WW模型</a></h6>
+
+<h6><a href="/tags/月度总结/" <="" a="">月度总结</a></h6>
+
+<h6><a href="/tags/Lecture-Notes/" <="" a="">Lecture Notes</a></h6>
+
+<h6><a href="/tags/科学写作/" <="" a="">科学写作</a></h6>
+
+<h6><a href="/tags/Review/" <="" a="">Review</a></h6>
+
+<h6><a href="/tags/阅读列表/" <="" a="">阅读列表</a></h6>
+
+
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  April 25, 2019
+  
+    <span class="taglist">  &middot; 
+    
+    
+      <a href="/tags/WW模型/">WW模型</a> 
+    
+    </span>
+  
+
+  <h1 class="post-title">AVB在PF线以上采样效率的测试</h1>
+  <section class="post-content article-entry">
+    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>在WW模型的PF线以上的区域我们观察到cluster算法给出的cluster非常大。文献中对此的讨论主要有：</p>
+<ol>
+<li><p>只有在二维Ising模型中SW和Wolff算法对应的逾渗模型的逾渗阈值$p_c$才与Ising模型的临界温度$T_c$对应。在三维中虽然不对应，但是问题不严重。这意味着不是每个推广的SW、Wolff算法都能够对应一个逾渗模型，使得$p_c$与$T_c$对应（具体的探讨并不清楚，这里只是根据文献中的描述进行的推测）。在WW模型中，对应的逾渗模型逾渗阈值非常低，对应一个特征温度$T_0$可能远大于模型的$T_c$，这样逾渗区域$p&gt;p_c$对应温度区域$T&lt;T_0$，存在一个$T_c&lt;T&lt;T_0$的区域发生逾渗（正常应该是$T&lt;T_c\approx T_0$发生逾渗）。</p>
+</li>
+<li><p>参考Yuan的文章，在PF线以上的区域有可能存在一些介于F相和P相之间的“相”，Yuan的文章中称之为cluster fluid和percolating fluid。这些“相”的存在必然是和长短程竞争的相互作用有关的。在WW模型中当然也有可能存在。在这个区域，SF等算法必须特别小心，因为这些算法可能表现得很正常，但是可能采样没有达到系统平衡。单从能量或者磁化强度的轨迹上看可能会让人误认为达到平衡，这时候务必使用更精细的参数来讨论平衡问题。如果能够达到平衡，可以考察这个区域内cluster（simple cubic percolation定义下的cluster，并非cluster-flip算法定义的Cluster）的大小与分布。至于其边界，则有可能无法通过热力学量来描述，而是通过percolation参数来描述。</p>
+</li>
+<li><p>鉴于第2点，我们希望能够用有效的算法在这个区域内采样，获得平衡统计下的cluster尺寸分布，确定这个区域确实存在这样的问题。所以我们需要比较准确地知道AVBMC相比SF在这个区域内的采样效率。</p>
+</li>
+<li><p>至于这个区域出现大的cluster这一点如何影响cluster算法（二者的cluster定义并不相同），可能在后续的研究中会仔细探讨。这是个很有趣的问题。</p>
+</li>
+</ol>
+<p>综上，<strong>本实验的目的</strong>是表征AVBMC相对SF在“big cluster”区域的采样效率。</p>
+<p><strong>可以测定的量</strong>除了能量和磁化强度的自关联时间外，更精细的量可以是自旋自关联时间。</p>
+<p>此外辅助的手段是：在获取自关联时间后，得到以自关联时间为间隔的一系列snapshot。如果真的达到平衡，这些snapshot应该是独立的样本。因为在这个区域内存在可能性：采样算法被trap到一个局部极小值附近，这样从能量和磁化强度上看似乎是达到了平衡；然而我们真正需要达到平衡的构型却没有达到平衡，所以通过观察这些本该独立的snapshot构型是否真的没有关联，则在自旋关联时间的基础上进一步证实采样的独立性。</p>
+<p>自旋自关联时间的计算可能需要较大地重构程序。</p>
+<p>这之后能够获得一系列独立的样本，通过这些样本可以计算cluster size distribution以及percolation probability，来尝试确定这个区域的边界。</p>
+<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>实验的两个阶段：</p>
+<h2 id="阶段一"><a href="#阶段一" class="headerlink" title="阶段一"></a>阶段一</h2><p><strong>计算AVBMC和SF的能量、磁化强度和自旋的自关联时间</strong><br>需要考虑怎么加入自旋的自关联时间计算。</p>
+<h2 id="阶段二"><a href="#阶段二" class="headerlink" title="阶段二"></a>阶段二</h2><p><strong>通过snapshot确定sampling的独立性</strong><br>这个阶段需要按照一定的时间间隔产生snapshot，然后通过观察来肯定采样独立性。</p>
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Ye Liang</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2019/04/24/cluster-debate/">
+        <!--关于PF线计算的观点综述--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
+        </footer>
+        
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
+
+
