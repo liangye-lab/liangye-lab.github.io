@@ -84,7 +84,18 @@
 <p>这之后能够获得一系列独立的样本，通过这些样本可以计算cluster size distribution以及percolation probability，来尝试确定这个区域的边界。</p>
 <h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>实验的两个阶段：</p>
 <h2 id="阶段一"><a href="#阶段一" class="headerlink" title="阶段一"></a>阶段一</h2><p><strong>计算AVBMC和SF的能量、磁化强度和自旋的自关联时间</strong><br>需要考虑怎么加入自旋的自关联时间计算。</p>
+<ol>
+<li>以能量和磁化强度考察自关联时间，同时观察三个算法。对于AVBMC，取三个有代表性的混合率，取三个有代表性的bias。对于boundary SF，只关注纯边界移动就可以了。温度选择3.0, 4.0, 6.0, 10.0, 100.0这些应该就可以。跑的步数用$10^6$先试试。通过这个测试，估算出各自弛豫时间和自关联时间的量级。</li>
+<li>使程序能够导出构型。我猜测自关联时间大致不会超过$10^3$，这样跑$10^4$应该是足够的。当然能更少更好。导出构型之后就可以计算自旋的自关联时间。自旋的自关联时间可能会更长一点，但是如果算法能够达到平衡，自旋的自关联时间应该和E和M处于同一个量级。通过这个测试，可以提供更多证据证明算法在这个区域内能够达到平衡。</li>
+</ol>
 <h2 id="阶段二"><a href="#阶段二" class="headerlink" title="阶段二"></a>阶段二</h2><p><strong>通过snapshot确定sampling的独立性</strong><br>这个阶段需要按照一定的时间间隔产生snapshot，然后通过观察来肯定采样独立性。</p>
+<ol>
+<li>既然程序已经能够导出每一帧的构型，那么制作一系列movie直观地观察独立性就好了。由于眼睛观察的随意性，只要不出现特别明显的现象就好。</li>
+</ol>
+<h2 id="之后的考虑"><a href="#之后的考虑" class="headerlink" title="之后的考虑"></a>之后的考虑</h2><ol>
+<li>如果可以证实算法达平，那么下面要考虑求percolation的cluster distribution。这个步骤应该是下一个实验。目前的策划是得到独立的sample构型，对其中一边粗粒化，用python等将cluster涂色，一方面观察有没有percolating cluster，求percolation probability，另一方面计算cluster size distribution。这样在此区域和完全的P区域就可以找到差别：此区域和P区域的边界或许可以使用percolation threshold来标记。</li>
+<li>如果找不到高效达平的算法，就比较麻烦了。或许要借助并行回火或者二维cluster算法来做了。这就是后话了。</li>
+</ol>
 <h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
   </section>
   <footer class="post-footer">
