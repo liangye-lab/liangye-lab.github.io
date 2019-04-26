@@ -82,7 +82,8 @@
 <p>此外辅助的手段是：在获取自关联时间后，得到以自关联时间为间隔的一系列snapshot。如果真的达到平衡，这些snapshot应该是独立的样本。因为在这个区域内存在可能性：采样算法被trap到一个局部极小值附近，这样从能量和磁化强度上看似乎是达到了平衡；然而我们真正需要达到平衡的构型却没有达到平衡，所以通过观察这些本该独立的snapshot构型是否真的没有关联，则在自旋关联时间的基础上进一步证实采样的独立性。</p>
 <p>自旋自关联时间的计算可能需要较大地重构程序。</p>
 <p>这之后能够获得一系列独立的样本，通过这些样本可以计算cluster size distribution以及percolation probability，来尝试确定这个区域的边界。</p>
-<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>实验的两个阶段：</p>
+<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>所有的实验都在$\kappa=0.07$下进行。</p>
+<p>实验的两个阶段：</p>
 <h2 id="阶段一"><a href="#阶段一" class="headerlink" title="阶段一"></a>阶段一</h2><p><strong>计算AVBMC和SF的能量、磁化强度和自旋的自关联时间</strong><br>需要考虑怎么加入自旋的自关联时间计算。</p>
 <ol>
 <li>以能量和磁化强度考察自关联时间，同时观察三个算法。对于AVBMC，取三个有代表性的混合率，取三个有代表性的bias。对于boundary SF，只关注纯边界移动就可以了。温度选择3.0, 4.0, 6.0, 10.0, 100.0这些应该就可以。跑的步数用$10^6$先试试。通过这个测试，估算出各自弛豫时间和自关联时间的量级。</li>
@@ -96,7 +97,17 @@
 <li>如果可以证实算法达平，那么下面要考虑求percolation的cluster distribution。这个步骤应该是下一个实验。目前的策划是得到独立的sample构型，对其中一边粗粒化，用python等将cluster涂色，一方面观察有没有percolating cluster，求percolation probability，另一方面计算cluster size distribution。这样在此区域和完全的P区域就可以找到差别：此区域和P区域的边界或许可以使用percolation threshold来标记。</li>
 <li>如果找不到高效达平的算法，就比较麻烦了。或许要借助并行回火或者二维cluster算法来做了。这就是后话了。</li>
 </ol>
-<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h2 id="SF、AVBMC和boundary-SF的能量、磁化强度的自关联时间"><a href="#SF、AVBMC和boundary-SF的能量、磁化强度的自关联时间" class="headerlink" title="SF、AVBMC和boundary SF的能量、磁化强度的自关联时间"></a>SF、AVBMC和boundary SF的能量、磁化强度的自关联时间</h2><p>在$T=3.0$时，能量的自关联时间都在1.0~1.3，差别不大。磁化强度的自关联时间更长一点，SF和boundary SF都在7~7.9之间，纯boundary SF自关联时间最低，90%的boundary SF自关联时间比SF稍长一点；AVBMC这样带swap的算法的自关联时间就比较长，可以预期当AVB比例达到100%时自关联时间应该无穷大，因为根本不改变M。这里注意到AVB比例$a$与自关联时间$\tau$可能存在一个关系$\tau=11\tan(\pi a/2)+4.6$（线性回归结果，其中$a=0$与SF略有差异）。</p>
+<p>在更高温度下的计算在现在看来没有意义，因为从这两个指标上来看，自关联时间只可能更短。</p>
+<p>单从以上结果来看，我们认为SF和boundary SF对系统的总体采样更好。但是由于swap算法对于M的更新天生有不足，所以最好通过其他的方式再做表征。从能量和磁化强度的轨迹上来看，达平的时间几乎可以不考虑。</p>
+<h2 id="自关联时间"><a href="#自关联时间" class="headerlink" title="自关联时间"></a>自关联时间</h2><p>以上结果是乐观的，倾向于在这个区域SF等算法能够发挥不错的作用。但是单凭能量和磁化强度作为达到平衡的证据还是不够充分。因此我使用自旋的自关联时间来进一步考察构型之间的关联程度来加强结论。</p>
+<p>这里需要将构型输出。程序上只要将<code>main()</code>中的构型输出关闭，在<code>Sample()</code>中每次采样后输出就可以了。此外不需要跑太长，毕竟计算平均自旋自关联非常耗时。如果之前的算法确实达到平衡，那么取$10^4$步足够。</p>
+<p>在$T=3.0$时SF、AVBMC和boundary SF的平均自旋关联时间都在1.5左右，两者几乎一致。这意味着如果仍要坚持认为在这个区域采样不能达到平衡，就只能通过观察了。</p>
+<p>这里有个小问题：我跑了20000步，取其中2000步分析自相关，应该分析最后2000步而不是最开始的2000步。这样是为了尽量达到平衡。(实际上最后观察到没什么区别。）</p>
+<p>到此，我认为，现在可以判断要么算法都能将系统平衡，要么采样被死死地trap到某一个局部极小值当中了，这个势垒对应的动力学时间远远超过现在采样的时间。</p>
+<p><img src="/img/spin_autocorr.png" alt="spin autocorrelation" width="800"></p>
+<h2 id="Snapshot观察（预期）"><a href="#Snapshot观察（预期）" class="headerlink" title="Snapshot观察（预期）"></a>Snapshot观察（预期）</h2><p>自旋的自关联时间呈现出比较短的自关联时间，那么最后我们直接通过观察movie来直观感受关联状况。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
   </section>
   <footer class="post-footer">
     <!--
