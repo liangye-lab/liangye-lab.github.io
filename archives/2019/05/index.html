@@ -8,7 +8,7 @@
         <link rel="shortcut icon" href="">
         <link rel="canonical" href="http://github.com/">
         <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
-        <title>AVBMC在WW模型上的效果测试 | 实验记录</title>
+        <title>Archives: 2019/5 | 实验记录</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 
     </head>
     
-		<body class="post-template">
+		<body class="home-template">
 	
 
         <header id="header">
@@ -52,53 +52,22 @@
 
         <main id="content">
         
-
-<article class="post">
-  March 14, 2019
+<section id="{{id}}" class="{{post_class}}">
+  <h3 class="post-title">
+  <a href="/2019/05/02/how-cluster-algorithm-gradually-fails/">从高温往下，cluster algorithm是怎样失效的</a>
   
-    <span class="taglist">  &middot; 
-    
-    
-      <a href="/tags/WW项目/">WW项目</a> 
-    
-    </span>
+  <span class="separator"> &middot; </span>
   
-
-  <h1 class="post-title">AVBMC在WW模型上的效果测试</h1>
-  <section class="post-content article-entry">
-    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>AVBMC试图改善由于势能面过于崎岖造成的SF采样效率低下的问题。我们将AVBMC应用在Lattice模型上。第一个版本的AVBMC没有特别强调相反符号互换，可能造成一些采样浪费。第二个版本针对spin交换做了优化。</p>
-<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><p>WidomWheelerAVBMCSF, v2.0</p>
-<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>对AVB rate和$P_\text{bias}$两个参数跑$10^5$次MC，计算能量的自相关函数，看AVB算法对提高效率有没有帮助。</p>
-<p>因为目前在计算PF相变，就观察相变线上$T=2.20,\kappa=0.07$的情况。</p>
-<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><p><code>cluster_AVBR0.x0_PB0.x0_LWX-1.0Y-1.0Z-1.0/dataK0.07T2.20/</code></p>
-<h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><p><img src="/img/avbmc/autocorr0.30.png" alt="autocorr0.30" width="800"><br><img src="/img/avbmc/autocorr0.50.png" alt="autocorr0.50" width="800"><br><img src="/img/avbmc/autocorr0.80.png" alt="autocorr0.80" width="800"></p>
-<p>显然从自相关函数上来看，采样效率并没有得到任何提高。</p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>从目前的数据来看，这样的AVBMC方法对WW模型在PF线上的采样效率没有提高。</p>
-<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><p>讨论是否可以改进AVBMC算法。</p>
-
-  </section>
-  <footer class="post-footer">
-    <!--
-    <section class="author">
-      <h4>Ye Liang</h4>
-      <p></p>
-    </section>
-    -->
-  </footer>
-</article>
+  May 2, 2019
+  
+  
+  </h3>
+</section>
 
 <nav class="pagination" role="pagination">
-    
-    <a class="newer-posts" href="/2019/03/21/trangle-soft-matter-discussion-group-2019-spring/">
-        ← prev <!--Notes for 2019 Spring Triangle Soft Matter Discussion Group-->
-    </a>
-    
-    <span class="page-number">•</span>
-    
-    <a class="older-posts" href="/2019/03/06/parallel-tempering/">
-        <!--并行回火研究WW模型PF相变--> next →
-    </a>
-    
+  
+  <span class="page-number">Page 1 of 1</span>
+  
 </nav>
 
 

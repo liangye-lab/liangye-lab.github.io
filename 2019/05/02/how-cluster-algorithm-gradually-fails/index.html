@@ -8,7 +8,7 @@
         <link rel="shortcut icon" href="">
         <link rel="canonical" href="http://github.com/">
         <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
-        <title>AVBMC在WW模型上的效果测试 | 实验记录</title>
+        <title>从高温往下，cluster algorithm是怎样失效的 | 实验记录</title>
         <meta name="description" content="{{meta_description}}">
 
         <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
@@ -54,28 +54,17 @@
         
 
 <article class="post">
-  March 14, 2019
-  
-    <span class="taglist">  &middot; 
-    
-    
-      <a href="/tags/WW项目/">WW项目</a> 
-    
-    </span>
+  May 2, 2019
   
 
-  <h1 class="post-title">AVBMC在WW模型上的效果测试</h1>
+  <h1 class="post-title">从高温往下，cluster algorithm是怎样失效的</h1>
   <section class="post-content article-entry">
-    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>AVBMC试图改善由于势能面过于崎岖造成的SF采样效率低下的问题。我们将AVBMC应用在Lattice模型上。第一个版本的AVBMC没有特别强调相反符号互换，可能造成一些采样浪费。第二个版本针对spin交换做了优化。</p>
-<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><p>WidomWheelerAVBMCSF, v2.0</p>
-<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><p>对AVB rate和$P_\text{bias}$两个参数跑$10^5$次MC，计算能量的自相关函数，看AVB算法对提高效率有没有帮助。</p>
-<p>因为目前在计算PF相变，就观察相变线上$T=2.20,\kappa=0.07$的情况。</p>
-<h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><p><code>cluster_AVBR0.x0_PB0.x0_LWX-1.0Y-1.0Z-1.0/dataK0.07T2.20/</code></p>
-<h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><p><img src="/img/avbmc/autocorr0.30.png" alt="autocorr0.30" width="800"><br><img src="/img/avbmc/autocorr0.50.png" alt="autocorr0.50" width="800"><br><img src="/img/avbmc/autocorr0.80.png" alt="autocorr0.80" width="800"></p>
-<p>显然从自相关函数上来看，采样效率并没有得到任何提高。</p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>从目前的数据来看，这样的AVBMC方法对WW模型在PF线上的采样效率没有提高。</p>
-<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><p>讨论是否可以改进AVBMC算法。</p>
-
+    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>本实验讨论的是$\kappa=0.07$高于PF相变温度的区域。在这个区域cluster算法失效。但是显然在高温区，cluster算法应该是可以用的。所以现在我们探讨的问题是：</p>
+<p>Cluster算法从什么温度开始失效？从介观结构上，失效时发生了什么？这些变化如何影响cluster算法？</p>
+<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h2 id="实验1-求cluster算法的-tau-T-图"><a href="#实验1-求cluster算法的-tau-T-图" class="headerlink" title="实验1 求cluster算法的$\tau-T$图"></a>实验1 求cluster算法的$\tau-T$图</h2><p>我们可以计算E和M的$\tau$。预期随着温度降低，$\tau$开始升高。显然，计算$\tau$的时候要求采样达到平衡，而$\tau$和$\tau_{eq}$应该存在关联，所以到某个温度的时候$\tau$高到无法平衡，我们需要知道这个点在哪里。</p>
+<p>我预期dynamic critical exponent应该是没法严格算的，因为在远离critical point的时候算法就失效了。当然或许可以外推。</p>
+<h2 id="实验2-随着温度降低、-tau-增长，系统的介观结构的变化"><a href="#实验2-随着温度降低、-tau-增长，系统的介观结构的变化" class="headerlink" title="实验2 随着温度降低、$\tau$增长，系统的介观结构的变化"></a>实验2 随着温度降低、$\tau$增长，系统的介观结构的变化</h2><p>观察movies，可以借助计算cluster size distribution等来考察系统的变化。我现在不知道什么样的现象能够将算法和模型性质联系起来，只能随便猜测。</p>
+<h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
   </section>
   <footer class="post-footer">
     <!--
@@ -89,14 +78,10 @@
 
 <nav class="pagination" role="pagination">
     
-    <a class="newer-posts" href="/2019/03/21/trangle-soft-matter-discussion-group-2019-spring/">
-        ← prev <!--Notes for 2019 Spring Triangle Soft Matter Discussion Group-->
-    </a>
-    
     <span class="page-number">•</span>
     
-    <a class="older-posts" href="/2019/03/06/parallel-tempering/">
-        <!--并行回火研究WW模型PF相变--> next →
+    <a class="older-posts" href="/2019/04/25/avb-efficiency/">
+        <!--AVB在PF线以上采样效率的测试--> next →
     </a>
     
 </nav>
