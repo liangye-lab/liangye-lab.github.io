@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+    <head><meta name="generator" content="Hexo 3.8.0">
+		
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="">
+        <link rel="shortcut icon" href="">
+        <link rel="canonical" href="http://github.com/">
+        <link rel="alternate" type="application/rss+xml" title="Ye Liang" href="">
+        <title>Hybrid Cluster算法求WW的PF的测试 | 实验记录</title>
+        <meta name="description" content="{{meta_description}}">
+
+        <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/styles/crisp.css">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    
+		<body class="post-template">
+	
+
+        <header id="header">
+            
+            <h1><a href="/">Ye Liang</a></h1>
+            <p></p>
+            <div id="follow-icons">
+              </div>
+<h6>---Tags---</h6>
+
+<h6><a href="/tags/月度总结/" <="" a="">月度总结</a></h6>
+
+<h6><a href="/tags/Lecture-Notes/" <="" a="">Lecture Notes</a></h6>
+
+<h6><a href="/tags/科学写作/" <="" a="">科学写作</a></h6>
+
+<h6><a href="/tags/WW项目/" <="" a="">WW项目</a></h6>
+
+<h6><a href="/tags/Review/" <="" a="">Review</a></h6>
+
+<h6><a href="/tags/阅读列表/" <="" a="">阅读列表</a></h6>
+
+
+        </header>
+
+        <main id="content">
+        
+
+<article class="post">
+  May 23, 2019
+  
+
+  <h1 class="post-title">Hybrid Cluster算法求WW的PF的测试</h1>
+  <section class="post-content article-entry">
+    <h1 id="实验背景和目的"><a href="#实验背景和目的" class="headerlink" title="实验背景和目的"></a>实验背景和目的</h1><p>$\kappa=0.07$</p>
+<h1 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h1><h1 id="程序版本"><a href="#程序版本" class="headerlink" title="程序版本"></a>程序版本</h1><h1 id="数据存档位置"><a href="#数据存档位置" class="headerlink" title="数据存档位置"></a>数据存档位置</h1><h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>$T$</th>
+<th>2.2</th>
+<th>2.25</th>
+<th>2.3</th>
+<th>2.35</th>
+<th>2.4</th>
+<th>2.45</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\tau_{Mstep}$</td>
+<td>753.5850481601962</td>
+<td>14.655466585577118</td>
+<td>4.590155247663134</td>
+<td>2.3775436913958927</td>
+<td>1.481483948222845</td>
+<td>0.9883041161228331</td>
+</tr>
+<tr>
+<td>$N_c$</td>
+<td>29.22388888888889</td>
+<td>14.497344444444444</td>
+<td>12.18901111111111</td>
+<td>10.698866666666667</td>
+<td>9.863711111111112</td>
+<td>9.131577777777778</td>
+</tr>
+<tr>
+<td>$\tau_M$</td>
+<td>22022.685715761556</td>
+<td>212.46534708515762</td>
+<td>55.949453315490906</td>
+<td>25.437022948419138</td>
+<td>14.612929681018436</td>
+<td>9.024775904473572</td>
+</tr>
+<tr>
+<td>$\tau_{Estep}$</td>
+<td>12.00816602073924</td>
+<td>1.4797726176611616</td>
+<td>0.8925275347518316</td>
+<td>0.7903371832142303</td>
+<td>0.7404717674406813</td>
+<td>0.7081074871481648</td>
+</tr>
+<tr>
+<td>$E/N$</td>
+<td>-1.1907499440393516</td>
+<td>-1.0925959556712963</td>
+<td>-1.0514157618634261</td>
+<td>-1.0187710785300925</td>
+<td>-0.9905343976851851</td>
+<td>-0.9652708967592591</td>
+</tr>
+<tr>
+<td>$\sigma_{E/N}$</td>
+<td>0.0007716844942155719</td>
+<td>0.00014351530215089654</td>
+<td>9.837102179807738e-05</td>
+<td>8.742994743389271e-05</td>
+<td>8.086658129845769e-05</td>
+<td>7.652068335280012e-05</td>
+</tr>
+<tr>
+<td>$m$</td>
+<td>0.3843205381944445</td>
+<td>0.10245394386574073</td>
+<td>0.06224305844907408</td>
+<td>0.04733380497685184</td>
+<td>0.039848434606481485</td>
+<td>0.034751420717592595</td>
+</tr>
+<tr>
+<td>$\sigma_m$</td>
+<td>0.020771735418710583</td>
+<td>0.0018085449843653425</td>
+<td>0.0006282011373828985</td>
+<td>0.00033473243525345905</td>
+<td>0.0002309940778175718</td>
+<td>0.00016403007922977556</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
+  </section>
+  <footer class="post-footer">
+    <!--
+    <section class="author">
+      <h4>Ye Liang</h4>
+      <p></p>
+    </section>
+    -->
+  </footer>
+</article>
+
+<nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="/2019/05/02/how-cluster-algorithm-gradually-fails/">
+        <!--从高温往下，cluster algorithm是怎样失效的--> next →
+    </a>
+    
+</nav>
+
+
+        </main>
+        <footer id="footer">
+            <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
+        </footer>
+        
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
+
+
