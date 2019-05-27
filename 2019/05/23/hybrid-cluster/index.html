@@ -39,9 +39,9 @@
 
 <h6><a href="/tags/Lecture-Notes/" <="" a="">Lecture Notes</a></h6>
 
-<h6><a href="/tags/科学写作/" <="" a="">科学写作</a></h6>
-
 <h6><a href="/tags/WW项目/" <="" a="">WW项目</a></h6>
+
+<h6><a href="/tags/科学写作/" <="" a="">科学写作</a></h6>
 
 <h6><a href="/tags/Review/" <="" a="">Review</a></h6>
 
@@ -241,6 +241,8 @@
 </tbody>
 </table>
 </div>
+<h2 id="真实时间效率"><a href="#真实时间效率" class="headerlink" title="真实时间效率"></a>真实时间效率</h2><p>$T=2.3, L=24$<br>SF: $10^6$ sweeps, $\tau_step=153$, 独立样本数$10^6/153=6.5\times10^3$, $t=5.8 h$, $v=0.89 h/10^3$.</p>
+<p>Cluster: $10^6$ sweeps, $\tau_step=4.6$, 独立样本数$10^6/4.5=2.2\times10^5$, $t=15.6 h$, $v=0.071h/10^3$.</p>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1>
   </section>
   <footer class="post-footer">
@@ -269,7 +271,24 @@
             <section id="footer-message">&copy; 2019 Ye Liang. All rights reserved. Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. </section>
         </footer>
         
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
 
 
